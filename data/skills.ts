@@ -1,10 +1,13 @@
+import type { IconName } from "@/components/Icon";
+
 export type Skill = { name: string; icon: string };
-export type SkillGroup = { id: string; label: string; skills: Skill[] };
+export type SkillGroup = { id: string; label: string; icon: IconName; skills: Skill[] };
 
 export const skillGroups: SkillGroup[] = [
   {
     id: "linguagens",
     label: "Linguagens",
+    icon: "code",
     skills: [
       { name: "Java", icon: "devicon-java-plain" },
       { name: "Python", icon: "devicon-python-plain" },
@@ -17,26 +20,28 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "backend",
     label: "Back-end",
+    icon: "server",
     skills: [
       { name: "Spring Boot", icon: "devicon-spring-original" },
       { name: "FastAPI", icon: "devicon-fastapi-plain" },
       { name: "Gin", icon: "devicon-go-original-wordmark" },
-      { name: "Redis", icon: "devicon-redis-plain" },
     ],
   },
   {
     id: "dados",
     label: "Dados",
+    icon: "database",
     skills: [
       { name: "PostgreSQL", icon: "devicon-postgresql-plain" },
       { name: "MongoDB", icon: "devicon-mongodb-plain" },
-      { name: "Firebase", icon: "devicon-firebase-plain" },
       { name: "Redis", icon: "devicon-redis-plain" },
+      { name: "Firebase", icon: "devicon-firebase-plain" },
     ],
   },
   {
     id: "devops",
     label: "DevOps",
+    icon: "cloud",
     skills: [
       { name: "Git", icon: "devicon-git-plain" },
       { name: "GitHub Actions", icon: "devicon-githubactions-plain" },
@@ -45,7 +50,3 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
 ];
-
-export const allSkills: Skill[] = Array.from(
-  new Map(skillGroups.flatMap((g) => g.skills).map((s) => [s.name, s])).values(),
-);

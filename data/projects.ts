@@ -2,10 +2,13 @@
  * Curadoria dos projetos. Os números (estrelas, último push, release, linguagens)
  * são buscados ao vivo na API do GitHub — aqui ficam apenas os textos e a ordem.
  */
+import type { IconName } from "@/components/Icon";
+
 export type RepoRef = { owner: string; name: string };
 
 export type Repo = RepoRef & {
   role: string;
+  icon: IconName;
   summary: string;
   tags: string[];
 };
@@ -21,11 +24,11 @@ export type Project = {
   connection?: string;
   tags: string[];
   featured?: boolean;
-  /** Capturas de tela servidas pelo raw.githubusercontent.com */
+  /** Capturas de tela copiadas para /public (originais em assemble-app/screenshots). */
   screenshots?: { src: string; alt: string }[];
   liveUrl?: string;
   /** Repositórios do mesmo ecossistema, exibidos como links. */
-  ecosystem?: RepoRef[];
+  ecosystem?: (RepoRef & { label: string })[];
 };
 
 const assembleShots = (base: string) =>
@@ -35,7 +38,7 @@ const assembleShots = (base: string) =>
     ["05-assemble-match.png", "Assemble mútuo com compatibilidade"],
     ["06-conversa.png", "Conversa em personagem"],
     ["08-conexoes-compatibilidade.png", "Aba de conexões"],
-  ].map(([file, alt]) => ({ src: `${base}/${file}`, alt }));
+  ].map(([file, alt]) => ({ src: `${base}/${file.replace(".png", ".webp")}`, alt }));
 
 export const projects: Project[] = [
   {
@@ -52,6 +55,7 @@ export const projects: Project[] = [
         owner: "felipeirl",
         name: "assemble-app",
         role: "Cliente Android",
+        icon: "phone",
         summary:
           "Kotlin e Jetpack Compose. Login com Firebase e Google, onboarding por preferências, baralho diário, chat e perfil, em português e inglês.",
         tags: ["Kotlin", "Compose", "Firebase Auth"],
@@ -60,14 +64,13 @@ export const projects: Project[] = [
         owner: "felipeirl",
         name: "assemble-api",
         role: "Servidor",
+        icon: "server",
         summary:
           "FastAPI e Firestore. Motor de decisão determinístico, conversas assíncronas via filas e guardrail local (Laya) filtrando entrada e saída.",
         tags: ["FastAPI", "Firestore", "LiteLLM", "Docker"],
       },
     ],
-    screenshots: assembleShots(
-      "https://raw.githubusercontent.com/felipeirl/assemble-app/HEAD/screenshots",
-    ),
+    screenshots: assembleShots("/images/assemble"),
   },
   {
     id: "quimia",
@@ -82,6 +85,7 @@ export const projects: Project[] = [
         owner: "Quimia-br",
         name: "quimia-api",
         role: "API REST",
+        icon: "server",
         summary:
           "Autenticação com Firebase e JWT, perfis de usuário, empresa e admin, cache com Redis e contrato OpenAPI testado.",
         tags: ["Spring Boot", "JWT", "ArchUnit"],
@@ -89,10 +93,10 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://quimia.discloud.app",
     ecosystem: [
-      { owner: "Quimia-br", name: "quimia-web" },
-      { owner: "Quimia-br", name: "quimia-mobile" },
-      { owner: "Quimia-br", name: "quimia-extractor-ai" },
-      { owner: "Quimia-br", name: "quimia-bd" },
+      { owner: "Quimia-br", name: "quimia-web", label: "Portal web" },
+      { owner: "Quimia-br", name: "quimia-mobile", label: "App móvel" },
+      { owner: "Quimia-br", name: "quimia-extractor-ai", label: "Extrator de FDS" },
+      { owner: "Quimia-br", name: "quimia-bd", label: "Banco de dados" },
     ],
   },
   {
@@ -106,6 +110,7 @@ export const projects: Project[] = [
         owner: "felipeirl",
         name: "streaming-lumos-plus",
         role: "Site",
+        icon: "code",
         summary: "Catálogo de filmes e séries com dados da API do TMDB.",
         tags: ["JavaScript", "TMDB"],
       },

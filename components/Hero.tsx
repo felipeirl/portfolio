@@ -4,7 +4,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import type { GithubProfile } from "@/lib/github";
 import { site } from "@/lib/site";
+import { Button } from "./Button";
 import { Counter } from "./Counter";
+import { Icon, type IconName } from "./Icon";
 
 const WORD_INTERVAL_MS = 2400;
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -36,11 +38,15 @@ function RotatingWord({ words }: { words: readonly string[] }) {
   );
 }
 
+/**
+ * Linha do título com revelação por máscara. O respiro vertical (padding + margem negativa)
+ * deixa o topo e a base das letras dentro da máscara, sem alterar o ritmo do título.
+ */
 function Line({ children, delay }: { children: React.ReactNode; delay: number }) {
   return (
-    <span className="block overflow-hidden pb-[0.08em]">
+    <span className="-my-[0.12em] block overflow-hidden py-[0.12em]">
       <motion.span
-        initial={{ y: "105%" }}
+        initial={{ y: "110%" }}
         animate={{ y: "0%" }}
         transition={{ duration: 1, delay, ease: EASE }}
         className="block"
@@ -51,31 +57,41 @@ function Line({ children, delay }: { children: React.ReactNode; delay: number })
   );
 }
 
+type Stat = { label: string; value: number; icon: IconName };
+
 export function Hero({ profile }: { profile: GithubProfile | null }) {
   const years = profile ? new Date().getFullYear() - new Date(profile.createdAt).getFullYear() : 0;
 
-  const stats = profile
+  const stats: Stat[] = profile
     ? [
-        { label: "Repositórios públicos", value: profile.publicRepos },
-        { label: "Estrelas recebidas", value: profile.totalStars },
-        { label: "Seguidores", value: profile.followers },
-        ...(years > 0 ? [{ label: "Anos no GitHub", value: years }] : []),
+        { label: "Repositórios", value: profile.publicRepos, icon: "layers" },
+        { label: "Estrelas", value: profile.totalStars, icon: "star" },
+        { label: "Seguidores", value: profile.followers, icon: "github" },
+        ...(years > 0
+          ? [
+              {
+                label: years === 1 ? "Ano no GitHub" : "Anos no GitHub",
+                value: years,
+                icon: "clock" as const,
+              },
+            ]
+          : []),
       ]
     : [];
 
   return (
-    <section id="hero" className="relative flex min-h-screen items-center pt-28 pb-24">
+    <section id="hero" className="relative flex min-h-screen items-center pt-32 pb-24">
       <div className="mx-auto w-[90%] max-w-[1280px]">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="mb-4 inline-block font-accent text-[clamp(1.5rem,4vw,2.5rem)] text-primary italic"
+          className="mb-5 inline-block font-accent text-[clamp(1.5rem,3.6vw,2.4rem)] text-primary italic"
         >
-          Portfólio
+          {site.name}
         </motion.span>
 
-        <h1 className="font-heading text-[clamp(4rem,12vw,11rem)] leading-[0.85] tracking-[-0.02em]">
+        <h1 className="font-heading text-[clamp(4.5rem,14vw,13rem)] leading-[1.02] tracking-[0.02em]">
           <Line delay={0.1}>BACK-END</Line>
           <Line delay={0.22}>
             <span className="text-primary">DEVELOPER</span>
@@ -86,30 +102,23 @@ export function Hero({ profile }: { profile: GithubProfile | null }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: EASE }}
-          className="mt-8 max-w-3xl"
+          className="mt-10 max-w-3xl"
         >
-          <p className="text-[clamp(1.2rem,2vw,1.8rem)] leading-snug text-white">
-            {site.intro}
-          </p>
-          <p className="mt-5 text-[clamp(1.1rem,1.6vw,1.4rem)] text-muted">
+          <p className="text-[clamp(1.2rem,2vw,1.7rem)] leading-snug text-white">{site.intro}</p>
+          <p className="mt-5 text-[clamp(1.1rem,1.6vw,1.35rem)] text-muted">
             Construo e estudo <RotatingWord words={site.rotatingWords} />
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-5">
-            <a
-              href={site.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border-2 border-white bg-white px-8 py-4 text-lg font-semibold text-bg transition duration-300 hover:scale-105 hover:border-secondary hover:bg-secondary"
-            >
-              Entre em Contato
-            </a>
-            <a
-              href="#projetos"
-              className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-lg font-semibold transition duration-300 hover:border-primary hover:bg-glass hover:text-primary"
-            >
-              Ver Projetos
-            </a>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Button href={site.links.linkedin} external>
+              Entre em contato
+            </Button>
+            <Button href="#projetos" variant="secondary" icon="layers">
+              Ver projetos
+            </Button>
+            <Button href={site.links.github} variant="link" icon="github" external>
+              GitHub
+            </Button>
           </div>
         </motion.div>
 
@@ -118,16 +127,17 @@ export function Hero({ profile }: { profile: GithubProfile | null }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.75, ease: EASE }}
-            className="mt-16 grid max-w-3xl grid-cols-2 gap-6 border-t border-line pt-8 sm:grid-cols-4"
+            className="mt-14 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4"
           >
             {stats.map((stat) => (
-              <div key={stat.label} className="flex flex-col">
-                <dt className="order-2 text-xs tracking-widest text-muted uppercase">
-                  {stat.label}
-                </dt>
-                <dd className="font-heading text-5xl text-secondary">
+              <div key={stat.label} className="glass flex flex-col gap-2 rounded-2xl p-4">
+                <span className="order-1 text-xl text-primary">
+                  <Icon name={stat.icon} />
+                </span>
+                <dd className="order-2 text-4xl leading-none font-medium tracking-tight tabular-nums">
                   <Counter value={stat.value} />
                 </dd>
+                <dt className="order-3 text-sm text-muted">{stat.label}</dt>
               </div>
             ))}
           </motion.dl>

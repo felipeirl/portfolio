@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 
 type Shot = { src: string; alt: string };
 
-const PHONE_WIDTH = 220;
-const PHONE_HEIGHT = 476;
+const PHONE_WIDTH = 190;
+const PHONE_HEIGHT = 375;
 
 /** Faixa de capturas arrastável. O arrasto fica limitado ao conteúdo medido. */
 export function ScreenshotCarousel({ shots }: { shots: Shot[] }) {

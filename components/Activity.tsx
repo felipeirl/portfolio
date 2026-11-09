@@ -7,7 +7,7 @@ const PACMAN_BASE = `https://raw.githubusercontent.com/${site.githubUser}/${site
 
 export function Activity({ items }: { items: ActivityItem[] }) {
   return (
-    <section id="atividade" className="relative py-32">
+    <section id="atividade" className="relative py-24">
       <div className="mx-auto w-[90%] max-w-[1280px]">
         <Reveal className="mb-14">
           <h2 className="section-title mb-6">Atividade ao Vivo</h2>
@@ -43,7 +43,7 @@ export function Activity({ items }: { items: ActivityItem[] }) {
                         <p className="truncate font-medium transition-colors group-hover:text-primary">
                           {item.message}
                         </p>
-                        <p className="mt-1 flex flex-wrap gap-x-3 font-mono text-xs text-muted">
+                        <p className="mt-1 flex flex-wrap gap-x-3 font-mono text-sm text-muted">
                           <span>{item.repo}</span>
                           <TimeAgo iso={item.createdAt} />
                         </p>
