@@ -1,53 +1,45 @@
-<div align="center">
-  <h1>Felipe Jorge Lopes | Portfólio Back-End</h1>
-  <p><b>Assistente de Desenvolvimento @ PicPay</b></p>
-  
-  <p>
-    <a href="#sobre-e-foco">Sobre</a> •
-    <a href="#arquitetura-do-portfólio">Arquitetura</a> •
-    <a href="#contato">Contato</a>
-  </p>
-</div>
+# Felipe Jorge Lopes — Portfólio
 
----
+Portfólio de desenvolvedor back-end. Mesmo design do site original (fundo dos Pilares da Criação, dourado `#FFCA89`, Tusker Grotesk, vidro fosco), agora dinâmico e alimentado pela API do GitHub.
 
-## Sobre e Foco
-Este repositório contém o código-fonte do meu **Portfólio Profissional**, criado para apresentar minha trajetória e aplicações práticas focadas em serviços Back-End. O design minimalista e direto ajuda a destacar as tecnologias com as quais trabalho, servindo como porta de entrada para meus repositórios.
+## Stack
 
-Minhas principais competências técnicas incluem:
-- Construção de **APIs RESTful** escaláveis e manutenção de microsserviços.
-- Persistência e modelagem de dados com **PostgreSQL** e **MongoDB**.
-- Integrações usando **Golang** e **Java**.
-- Controle de versão e colaboração ágil com **Git** e **GitHub**.
+| Camada | Tecnologia |
+|---|---|
+| Framework | Next.js (App Router) + React + TypeScript |
+| Estilo | Tailwind CSS v4 com tokens do design original |
+| Animação | Motion (reveal, parallax, tilt, carrossel arrastável) e Lenis (scroll suave) |
+| Dados | API REST do GitHub, com revalidação a cada hora (ISR) |
+| Deploy | Vercel |
 
----
+## O que é dinâmico
 
-## Arquitetura do Portfólio
-O portfólio foi escrito focando em alta performance e controle estrito sobre cada componente, eliminando dependências externas massivas ou frameworks complexos:
+- **Projetos**: estrelas, linguagens, último push, última release e número de commits vêm ao vivo do GitHub. Só os textos ficam em [`data/projects.ts`](data/projects.ts).
+- **Projetos em mais de um repositório** (Assemble: app + API) aparecem como um par ligado.
+- **Hero**: números do perfil (repositórios, estrelas, seguidores, anos no GitHub) com contagem animada.
+- **Atividade**: commits públicos recentes e o gráfico de contribuições em Pac-Man.
+- **Interação**: parallax do fundo, brilho que segue o cursor, filtro de habilidades, linha do tempo que se desenha no scroll, respeitando `prefers-reduced-motion`.
 
-* **HTML5 Semântico:** Estrutura concebida para entregar acessibilidade nativa e leitura limpa de tela.
-* **Vanilla CSS:** Layout impulsionado por modernas propriedades de Flexbox e CSS Grid. O sistema faz uso do padrão `backdrop-filter` para entregar o efeito de *Glassmorphism* (textura de vidro) e blend-modes para uniformizar a cor dos ícones. Tudo através de CSS System nativo.
-* **JavaScript (Vanilla):** O dinamismo do site é garantido não por pesadas bibliotecas, mas sim pela nativa `IntersectionObserver API` para interagir perfeitamente com eventos de rolagem (*scroll reveals*) de forma otimizada para navegadores Chrome e Safari.
-* **Vetorização UI:** A iconografia para ferramentas, bancos de dados e linguagens é sustentada puramente pelos CDNs nativos do `Devicon` e `FontAwesome`, minimizando ao máximo chamadas a arquivos de imagem e perdas de resolução em telas grandes ou pequenas telas móbiles.
+## Rodar localmente
 
----
+```bash
+npm install
+npm run dev
+```
 
-## Como Executar
-O portfólio não demanda Node.js ou bundlers estritos, apenas atua como um website estático leve:
+`GITHUB_TOKEN` é opcional (leitura pública). Defina em `.env.local` para ampliar o limite de requisições da API.
 
-1. Realize o clone deste repositório:
-   ```bash
-   git clone https://github.com/felipejorgel/portfolio.git
-   ```
-2. Navegue até o diretório baixado.
-3. Carregue o index e inicialize via live server, ou simplesmente abra o arquivo `index.html` em qualquer navegador atual.
+## Adicionar um projeto
 
----
+Edite [`data/projects.ts`](data/projects.ts) e acrescente um item com `repos` (um ou mais). As métricas aparecem sozinhas.
 
-## Contato
-Caso de uso corporativo, network ou colaborações de código, meus contatos centrais:
+## Estrutura
 
-- **Linkedin:** [Felipe Jorge Lopes](https://www.linkedin.com/in/felipe-jorge-6393a8324/)
-<div align="center">
-  <sub>Construído sem Frameworks (Vanilla)</sub>
-</div>
+```
+app/          layout, página e estilos globais
+components/   seções e peças de interface
+data/         projetos, habilidades e experiência
+lib/          configuração do site e cliente do GitHub
+public/       imagens otimizadas
+_archive/     versão estática anterior (HTML/CSS/JS)
+```
