@@ -1,53 +1,51 @@
-<div align="center">
-  <h1>Felipe Jorge Lopes | Portfólio Back-End</h1>
-  <p><b>Assistente de Desenvolvimento @ PicPay</b></p>
-  
-  <p>
-    <a href="#sobre-e-foco">Sobre</a> •
-    <a href="#arquitetura-do-portfólio">Arquitetura</a> •
-    <a href="#contato">Contato</a>
-  </p>
-</div>
+# Portfólio — Felipe Jorge
 
----
+Site pessoal de Felipe Jorge, desenvolvedor back-end. Next.js (App Router) com TypeScript, publicado na Vercel.
 
-## Sobre e Foco
-Este repositório contém o código-fonte do meu **Portfólio Profissional**, criado para apresentar minha trajetória e aplicações práticas focadas em serviços Back-End. O design minimalista e direto ajuda a destacar as tecnologias com as quais trabalho, servindo como porta de entrada para meus repositórios.
+## Stack
 
-Minhas principais competências técnicas incluem:
-- Construção de **APIs RESTful** escaláveis e manutenção de microsserviços.
-- Persistência e modelagem de dados com **PostgreSQL** e **MongoDB**.
-- Integrações usando **Golang** e **Java**.
-- Controle de versão e colaboração ágil com **Git** e **GitHub**.
+- **Next.js 15** (App Router, React 19) e **TypeScript** estrito
+- **Tailwind CSS v4** com tema próprio (ciano e violeta sobre fundo escuro)
+- **Framer Motion** para animações, respeitando `prefers-reduced-motion`
+- Dados dos projetos via **API do GitHub** (ISR, revalidação de 1 hora)
+- Interface bilíngue **PT/EN**, paleta de comandos (`Ctrl/⌘ + K`), SEO, Open Graph gerado e JSON-LD
 
----
+## Rodando localmente
 
-## Arquitetura do Portfólio
-O portfólio foi escrito focando em alta performance e controle estrito sobre cada componente, eliminando dependências externas massivas ou frameworks complexos:
+```bash
+npm install
+npm run dev
+```
 
-* **HTML5 Semântico:** Estrutura concebida para entregar acessibilidade nativa e leitura limpa de tela.
-* **Vanilla CSS:** Layout impulsionado por modernas propriedades de Flexbox e CSS Grid. O sistema faz uso do padrão `backdrop-filter` para entregar o efeito de *Glassmorphism* (textura de vidro) e blend-modes para uniformizar a cor dos ícones. Tudo através de CSS System nativo.
-* **JavaScript (Vanilla):** O dinamismo do site é garantido não por pesadas bibliotecas, mas sim pela nativa `IntersectionObserver API` para interagir perfeitamente com eventos de rolagem (*scroll reveals*) de forma otimizada para navegadores Chrome e Safari.
-* **Vetorização UI:** A iconografia para ferramentas, bancos de dados e linguagens é sustentada puramente pelos CDNs nativos do `Devicon` e `FontAwesome`, minimizando ao máximo chamadas a arquivos de imagem e perdas de resolução em telas grandes ou pequenas telas móbiles.
+Outros scripts:
 
----
+```bash
+npm run typecheck   # tsc --noEmit
+npm run lint        # ESLint
+npm run build       # build de produção
+```
 
-## Como Executar
-O portfólio não demanda Node.js ou bundlers estritos, apenas atua como um website estático leve:
+## Variáveis de ambiente
 
-1. Realize o clone deste repositório:
-   ```bash
-   git clone https://github.com/felipejorgel/portfolio.git
-   ```
-2. Navegue até o diretório baixado.
-3. Carregue o index e inicialize via live server, ou simplesmente abra o arquivo `index.html` em qualquer navegador atual.
+Todas opcionais:
 
----
+| Variável | Para que serve |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | URL pública (canonical, sitemap, Open Graph). Padrão: `https://felipeirl.vercel.app` |
+| `GITHUB_TOKEN` | Token somente leitura para aumentar o limite de requisições da API do GitHub |
 
-## Contato
-Caso de uso corporativo, network ou colaborações de código, meus contatos centrais:
+Sem `GITHUB_TOKEN`, o site usa a API anônima. Se ela falhar, os cards mostram os links sem estrelas nem datas.
 
-- **Linkedin:** [Felipe Jorge Lopes](https://www.linkedin.com/in/felipe-jorge-6393a8324/)
-<div align="center">
-  <sub>Construído sem Frameworks (Vanilla)</sub>
-</div>
+## Deploy na Vercel
+
+1. Em [vercel.com/new](https://vercel.com/new), importe o repositório `felipeirl/portfolio`.
+2. Mantenha as configurações detectadas (framework: Next.js).
+3. Em *Settings → Environment Variables*, defina `NEXT_PUBLIC_SITE_URL` com o domínio final.
+
+## Editando o conteúdo
+
+Textos, links, stack, experiência e projetos em destaque ficam em [`data/profile.ts`](data/profile.ts). Strings da interface ficam em [`data/strings.ts`](data/strings.ts).
+
+## Versão anterior
+
+O site em HTML, CSS e JavaScript puros está preservado em [`_archive/legacy`](_archive/legacy).
