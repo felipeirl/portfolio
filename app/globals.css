@@ -8,6 +8,7 @@
   --color-muted: rgb(255 255 255 / 0.7);
   --color-primary: #ffca89;
   --color-secondary: #ffead0;
+  --color-glass: rgb(20 20 20 / 0.62);
 
   --font-sans: var(--font-montreal), "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-tusker), "Impact", sans-serif;
