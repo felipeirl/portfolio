@@ -16,7 +16,7 @@ export function SmoothScroll() {
   useEffect(() => {
     if (reduced || !window.matchMedia("(pointer: fine)").matches) return;
 
-    const lenis = new Lenis({ lerp: LERP, anchors: true });
+    const lenis = new Lenis({ lerp: LERP, anchors: true, autoRaf: true });
     const root = document.documentElement;
     root.classList.add("lenis-on");
 
