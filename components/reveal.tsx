@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useMotionPref } from "./motion-pref";
 
 interface RevealProps {
   children: ReactNode;
@@ -13,7 +14,7 @@ const REVEAL_OFFSET_PX = 24;
 const REVEAL_DURATION_S = 0.6;
 
 export function Reveal({ children, delay = 0, className }: RevealProps) {
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useMotionPref();
 
   return (
     <motion.div

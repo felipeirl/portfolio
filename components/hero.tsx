@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { strings } from "@/data/strings";
 import type { GithubSnapshot } from "@/lib/github";
 import { ArrowUpRight, Github, MapPin } from "./icons";
 import { useLocale } from "./locale";
+import { useMotionPref } from "./motion-pref";
 import { TypingLines } from "./typing-lines";
 
 interface HeroProps {
@@ -14,7 +15,7 @@ interface HeroProps {
 
 export function Hero({ github }: HeroProps) {
   const { locale, t } = useLocale();
-  const reduceMotion = useReducedMotion();
+  const { reduced: reduceMotion } = useMotionPref();
   const [firstLine, secondLine] = strings.hero.titleLines[locale];
 
   const fade = (delay: number) => ({

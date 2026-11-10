@@ -47,7 +47,19 @@ export const Languages = (props: IconProps) => (
   </Base>
 );
 
-export const Briefcase = (props: IconProps) => (
+export const Zap = (props: IconProps) => (
+  <Base {...props}>
+    <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+  </Base>
+);
+
+export const ZapOff = (props: IconProps) => (
+  <Base {...props}>
+    <path d="m12.5 7.5.5-5.5-3.2 3.9M7 9.2 4 14h7l-1 8 5.3-6.6M3 3l18 18" />
+  </Base>
+);
+
+export const Briefcase =(props: IconProps) => (
   <Base {...props}>
     <rect x="3" y="7" width="18" height="13" rx="2" />
     <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" />

@@ -16,6 +16,10 @@ export const strings = {
   skipToContent: { pt: "Ir para o conteúdo", en: "Skip to content" },
   openPalette: { pt: "Abrir paleta de comandos", en: "Open command palette" },
   switchLanguage: { pt: "Mudar idioma", en: "Switch language" },
+  motion: {
+    reduce: { pt: "Reduzir movimento", en: "Reduce motion" },
+    restore: { pt: "Restaurar animações", en: "Restore animations" },
+  },
   openMenu: { pt: "Abrir menu", en: "Open menu" },
   closeMenu: { pt: "Fechar menu", en: "Close menu" },
   mainNav: { pt: "Principal", en: "Main" },

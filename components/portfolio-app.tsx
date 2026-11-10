@@ -10,6 +10,7 @@ import { Experience } from "./experience";
 import { Footer } from "./footer";
 import { Hero } from "./hero";
 import { LocaleProvider, useLocale } from "./locale";
+import { MotionPrefProvider } from "./motion-pref";
 import { Nav } from "./nav";
 import { Projects } from "./projects";
 import { Skills } from "./skills";
@@ -59,7 +60,9 @@ function Shell({ github }: PortfolioAppProps) {
 export function PortfolioApp({ github }: PortfolioAppProps) {
   return (
     <LocaleProvider>
-      <Shell github={github} />
+      <MotionPrefProvider>
+        <Shell github={github} />
+      </MotionPrefProvider>
     </LocaleProvider>
   );
 }
