@@ -62,6 +62,9 @@ export const strings = {
       en: "A look at some applications built with what I know. Numbers pulled live from GitHub.",
     },
     code: { pt: "Código", en: "Code" },
+    caseStudy: { pt: "Estudo de caso", en: "Case study" },
+    activity: { pt: "Atividade no GitHub, últimos 14 dias", en: "GitHub activity, last 14 days" },
+    latestPush: { pt: "Último push", en: "Latest push" },
     repo: { pt: "Ver repositório", en: "View repository" },
     updated: { pt: "Atualizado", en: "Updated" },
     allRepos: { pt: "Ver todos no GitHub", en: "See all on GitHub" },
@@ -79,6 +82,7 @@ export const strings = {
     },
     linkedin: { pt: "Conversar no LinkedIn", en: "Talk on LinkedIn" },
     github: { pt: "Ver o GitHub", en: "View GitHub" },
+    cv: { pt: "Baixar CV", en: "Download CV" },
   },
   footer: {
     tagline: {

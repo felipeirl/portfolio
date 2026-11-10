@@ -7,6 +7,7 @@ import { Background } from "./background";
 import { CommandPalette } from "./command-palette";
 import { Contact } from "./contact";
 import { Experience } from "./experience";
+import { FloatingCta } from "./floating-cta";
 import { Footer } from "./footer";
 import { Hero } from "./hero";
 import { LocaleProvider, useLocale } from "./locale";
@@ -16,6 +17,7 @@ import { Nav } from "./nav";
 import { PointerParallax } from "./pointer-parallax";
 import { Projects } from "./projects";
 import { Skills } from "./skills";
+import { SmoothScroll } from "./smooth-scroll";
 
 interface PortfolioAppProps {
   github: GithubSnapshot;
@@ -46,6 +48,7 @@ function Shell({ github }: PortfolioAppProps) {
       </a>
       <Background />
       <PointerParallax />
+      <SmoothScroll />
       <Nav onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
         <Hero github={github} />
@@ -55,6 +58,7 @@ function Shell({ github }: PortfolioAppProps) {
         <Projects github={github} />
         <Contact />
       </main>
+      <FloatingCta />
       <Footer />
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </>

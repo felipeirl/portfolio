@@ -123,15 +123,25 @@ export const experiences: Experience[] = [
   {
     company: "PicPay",
     role: {
-      pt: "Assistente de Desenvolvimento",
-      en: "Development Assistant",
+      pt: "Assistente de Desenvolvimento (Back-end)",
+      en: "Development Assistant (Back-end)",
     },
-    period: { pt: "out 2025 — atual", en: "Oct 2025 — present" },
+    period: { pt: "fev 2026 — atual", en: "Feb 2026 — present" },
     description: {
-      pt: "Atuo na área de e-commerce (Shop), ajudando no desenvolvimento e na manutenção de sistemas internos.",
-      en: "I work in the e-commerce area (Shop), helping develop and maintain internal systems.",
+      pt: "Squad Shop E2E, no fluxo de compra do marketplace do app. Desenvolvo e mantenho microsserviços em Go para e-commerce, com MongoDB e Redis, entrego código em produção com code review como autor e revisor, e trabalho com CI/CD em GitHub Actions e deploy em Kubernetes via GitOps (ArgoCD) na AWS.",
+      en: "Shop E2E squad, on the marketplace purchase flow of the app. I build and maintain Go microservices for e-commerce with MongoDB and Redis, ship code to production with code review as author and reviewer, and work with CI/CD on GitHub Actions and Kubernetes deployments via GitOps (ArgoCD) on AWS.",
     },
-    tags: ["E-commerce", "Sistemas internos"],
+    tags: ["Go", "MongoDB", "Redis", "Kubernetes", "ArgoCD", "GitHub Actions", "AWS"],
+  },
+  {
+    company: "PicPay",
+    role: { pt: "Auxiliar de TI", en: "IT Assistant" },
+    period: { pt: "out 2025 — fev 2026", en: "Oct 2025 — Feb 2026" },
+    description: {
+      pt: "Onboarding técnico na stack do squad: Go, MongoDB, Docker, arquitetura de microsserviços e fluxo de entrega.",
+      en: "Technical onboarding on the squad stack: Go, MongoDB, Docker, microservices architecture and the delivery workflow.",
+    },
+    tags: ["Go", "MongoDB", "Docker"],
   },
 ];
 
@@ -143,70 +153,46 @@ export interface Education {
 
 export const education: Education = {
   school: "Instituto J&F — Germinare Tech",
-  program: { pt: "Formação técnica", en: "Technical program" },
-  period: { pt: "conclusão em 2027", en: "graduating in 2027" },
+  program: {
+    pt: "Técnico em Tecnologia da Informação",
+    en: "Technical Diploma in Information Technology",
+  },
+  period: { pt: "conclusão prevista: dez 2027", en: "expected graduation: Dec 2027" },
 };
 
 export interface FeaturedProject {
+  /** repositório principal, de onde vêm estrelas, linguagem e data */
   repo: string;
+  /** dono do repositório, quando não é a conta pessoal */
+  owner?: string;
   title: string;
   description: Localized;
   stack: string[];
   /** ids dos ícones em public/icons */
   icons: string[];
-  demo?: string;
 }
 
 /** Projetos curados. Estrelas, linguagem e data vêm da API do GitHub. */
 export const featuredProjects: FeaturedProject[] = [
   {
     repo: "assemble-api",
-    title: "Assemble API",
+    title: "Assemble",
     description: {
-      pt: "API do Assemble: FastAPI, Firestore e IA com guardrail Laya. Servidor do app Android.",
-      en: "Assemble API: FastAPI, Firestore and AI with the Laya guardrail. Backend of the Android app.",
+      pt: "App Android e API para descobrir personagens de quadrinhos e conversar com eles. Kotlin e Jetpack Compose no cliente; FastAPI, Firestore e um guardrail de IA no servidor.",
+      en: "Android app and API to discover comic book characters and chat with them. Kotlin and Jetpack Compose on the client; FastAPI, Firestore and an AI guardrail on the server.",
     },
-    stack: ["Python", "FastAPI", "Firestore", "LLM"],
-    icons: ["py", "fastapi", "firebase"],
+    stack: ["Kotlin", "Jetpack Compose", "FastAPI", "Firestore", "LLM"],
+    icons: ["kotlin", "androidstudio", "py", "fastapi", "firebase"],
   },
   {
-    repo: "assemble-app",
-    title: "Assemble App",
+    repo: "quimia-api",
+    owner: "Quimia-br",
+    title: "Quimia API",
     description: {
-      pt: "App Android para descobrir personagens de quadrinhos e conversar com eles.",
-      en: "Android app to discover comic book characters and chat with them.",
+      pt: "Backend do Quimia: catálogo de produtos químicos, estante do usuário, análise de FDS e detecção de misturas perigosas. Monólito modular em Spring Boot com fronteiras garantidas por ArchUnit.",
+      en: "Quimia backend: chemical product catalog, user shelf, safety data sheet analysis and hazardous mixture detection. A modular Spring Boot monolith with boundaries enforced by ArchUnit.",
     },
-    stack: ["Kotlin", "Jetpack Compose", "Firebase"],
-    icons: ["kotlin", "androidstudio", "firebase"],
-  },
-  {
-    repo: "iniciar-jarvis",
-    title: "Iniciar Jarvis",
-    description: {
-      pt: "Abre o Claude Code com duas palmas, com detecção de áudio em tempo real para Windows.",
-      en: "Opens Claude Code with two claps, using real-time audio detection on Windows.",
-    },
-    stack: ["Python", "Áudio em tempo real"],
-    icons: ["py", "windows"],
-  },
-  {
-    repo: "satire-api",
-    title: "Satire API",
-    description: {
-      pt: "API REST em Spring Boot para um marketplace de bonecos.",
-      en: "Spring Boot REST API for a collectible figures marketplace.",
-    },
-    stack: ["Java", "Spring Boot", "REST"],
-    icons: ["java", "spring"],
-  },
-  {
-    repo: "streaming-lumos-plus",
-    title: "Lumos Plus",
-    description: {
-      pt: "Site de streaming em HTML, CSS e JavaScript puro, consumindo a API do TMDB.",
-      en: "Streaming site in plain HTML, CSS and JavaScript, consuming the TMDB API.",
-    },
-    stack: ["JavaScript", "TMDB API"],
-    icons: ["js", "html", "css"],
+    stack: ["Java 21", "Spring Boot", "PostgreSQL", "Redis", "Docker"],
+    icons: ["java", "spring", "postgres", "redis", "docker"],
   },
 ];

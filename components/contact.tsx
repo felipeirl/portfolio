@@ -9,7 +9,7 @@ import { Reveal } from "./reveal";
 import { SplitTitle } from "./split-title";
 
 export function Contact() {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
 
   return (
     <section id="contact" aria-labelledby="contact-title" className="py-32">
@@ -43,6 +43,15 @@ export function Contact() {
               </a>
             </Magnetic>
               <Magnetic>
+              <a
+                href={locale === "pt" ? "/cv/felipe-jorge-cv-pt.pdf" : "/cv/felipe-jorge-cv-en.pdf"}
+                download
+                className="inline-flex items-center gap-3 rounded-full border-2 border-fg px-8 py-3.5 text-lg font-semibold text-fg transition-all duration-300 hover:border-primary hover:text-primary active:scale-95"
+              >
+                {t(strings.contact.cv)}
+              </a>
+            </Magnetic>
+            <Magnetic>
               <a
                 href={profile.links.github}
                 target="_blank"

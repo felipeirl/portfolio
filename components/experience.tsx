@@ -25,7 +25,7 @@ export function Experience() {
 
         <ol className="relative ml-5 max-w-3xl space-y-10 pl-12 before:absolute before:top-0 before:left-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary before:to-primary/10 sm:mx-auto">
           {experiences.map((item) => (
-            <li key={item.company} className="relative">
+            <li key={`${item.company}-${item.period.pt}`} className="relative">
               <span
                 className={`${dotBase} border-primary text-primary shadow-[0_0_15px_rgb(255_202_137/0.5)]`}
               >
