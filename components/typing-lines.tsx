@@ -57,7 +57,7 @@ export function TypingLines({ lines }: TypingLinesProps) {
   return (
     <span>
       {text}
-      <span aria-hidden className="ml-0.5 inline-block w-2 animate-blink bg-cyan">
+      <span aria-hidden className="ml-0.5 inline-block w-2 animate-blink bg-primary">
         &nbsp;
       </span>
     </span>

@@ -6,7 +6,7 @@ interface TechIconProps {
   size?: number;
 }
 
-/** Ícones do skillicons.dev: todos no mesmo formato. */
+/** Ícones do skillicons.dev: todos no mesmo formato. Em cinza até o hover. */
 export function TechIcon({ id, label, size = 48 }: TechIconProps) {
   return (
     <Image
@@ -16,7 +16,7 @@ export function TechIcon({ id, label, size = 48 }: TechIconProps) {
       width={size}
       height={size}
       unoptimized
-      className="rounded-xl"
+      className="skill-icon rounded-xl"
     />
   );
 }

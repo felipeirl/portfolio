@@ -5,7 +5,7 @@ Site pessoal de Felipe Jorge, desenvolvedor back-end. Next.js (App Router) com T
 ## Stack
 
 - **Next.js 15** (App Router, React 19) e **TypeScript** estrito
-- **Tailwind CSS v4** com tema próprio (ciano e violeta sobre fundo escuro)
+- **Tailwind CSS v4** com o tema original do portfólio: fundo dos Pilares da Criação, cartões de vidro, pêssego (`#FFCA89`) sobre preto, fontes Tusker Grotesk, Neue Montreal e Playfair Display
 - **Framer Motion** para animações, respeitando `prefers-reduced-motion`
 - Dados dos projetos via **API do GitHub** (ISR, revalidação de 1 hora)
 - Interface bilíngue **PT/EN**, paleta de comandos (`Ctrl/⌘ + K`), SEO, Open Graph gerado e JSON-LD
@@ -31,7 +31,7 @@ Todas opcionais:
 
 | Variável | Para que serve |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | URL pública (canonical, sitemap, Open Graph). Padrão: `https://felipeirl.vercel.app` |
+| `NEXT_PUBLIC_SITE_URL` | URL pública (canonical, sitemap, Open Graph). Padrão: `https://felipejorge.vercel.app` |
 | `GITHUB_TOKEN` | Token somente leitura para aumentar o limite de requisições da API do GitHub |
 
 Sem `GITHUB_TOKEN`, o site usa a API anônima. Se ela falhar, os cards mostram os links sem estrelas nem datas.

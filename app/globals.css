@@ -1,42 +1,46 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #07090d;
-  --color-surface: #0d1117;
-  --color-elevated: #131a24;
-  --color-line: #1f2a37;
-  --color-fg: #e6edf3;
-  --color-muted: #8b949e;
-  --color-cyan: #00e5ff;
-  --color-cyan-dim: #00b8d4;
-  --color-violet: #7c4dff;
+  --color-bg: #0a0a0a;
+  --color-surface: #141414;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-fg: #ffffff;
+  --color-muted: rgb(255 255 255 / 0.7);
+  --color-primary: #ffca89;
+  --color-secondary: #ffead0;
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-montreal), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-tusker), "Impact", sans-serif;
+  --font-accent: var(--font-playfair), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code", monospace;
 
   --animate-blink: blink 1s steps(2, start) infinite;
-  --animate-float: float 8s ease-in-out infinite;
+  --animate-scroll-bounce: scroll-bounce 2s infinite;
 
   @keyframes blink {
     to {
       visibility: hidden;
     }
   }
-  @keyframes float {
+  @keyframes scroll-bounce {
     0%,
+    20%,
+    50%,
+    80%,
     100% {
-      transform: translate3d(0, 0, 0);
+      transform: translateY(0) translateX(-50%);
     }
-    50% {
-      transform: translate3d(0, -18px, 0);
+    40% {
+      transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+      transform: translateY(-5px) translateX(-50%);
     }
   }
 }
 
 :root {
   color-scheme: dark;
-  --mx: 50%;
-  --my: 30%;
 }
 
 html {
@@ -45,20 +49,30 @@ html {
 }
 
 body {
+  position: relative;
+  overflow-x: hidden;
   background: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-sans);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-secondary);
+}
+
 ::selection {
-  background: color-mix(in oklab, var(--color-cyan) 35%, transparent);
+  background: color-mix(in oklab, var(--color-primary) 40%, transparent);
   color: #fff;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-cyan);
+  outline: 2px solid var(--color-primary);
   outline-offset: 3px;
   border-radius: 6px;
 }
@@ -76,13 +90,62 @@ body {
   }
 }
 
-/* grade técnica no fundo */
-.bg-grid {
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 100%);
+/* fundo: Pilares da Criação, uma cópia no topo e outra espelhada na base */
+.bg-pillars {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: url("/images/pilares.jpg");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+  filter: saturate(0.8) contrast(1.1);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+.bg-pillars-bottom {
+  bottom: 0;
+  transform: scaleY(-1);
+}
+.bg-pillars-top {
+  top: 0;
+}
+
+/* cartão de vidro */
+.glass {
+  background: rgb(20 20 20 / 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.3);
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.4s ease,
+    background-color 0.4s ease;
+}
+.glass-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgb(255 202 137 / 0.3);
+}
+
+/* seções alternadas escurecem o fundo para dar leitura ao texto */
+.section-fade {
+  background: linear-gradient(to bottom, transparent, rgb(10 10 10 / 0.95), transparent);
+}
+
+/* ícones da stack: cinza até o hover */
+.skill-icon {
+  filter: grayscale(100%) brightness(1.5);
+  transition:
+    filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.skill-icon:hover,
+.glass:hover .skill-icon {
+  filter: grayscale(0%) brightness(1);
+  transform: scale(1.1);
 }
 
 /* holofote que segue o cursor dentro de cards */
@@ -98,7 +161,7 @@ body {
   border-radius: inherit;
   background: radial-gradient(
     420px circle at var(--sx, 50%) var(--sy, 0%),
-    rgb(0 229 255 / 0.14),
+    rgb(255 202 137 / 0.1),
     transparent 60%
   );
   opacity: 0;
@@ -108,18 +171,6 @@ body {
   opacity: 1;
 }
 
-.text-gradient {
-  background: linear-gradient(100deg, var(--color-cyan) 0%, var(--color-violet) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.hairline {
-  background: linear-gradient(90deg, transparent, var(--color-line), transparent);
-  height: 1px;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -127,7 +178,7 @@ body {
   background: var(--color-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-line);
+  background: #2a2a2a;
   border-radius: 8px;
   border: 2px solid var(--color-bg);
 }
