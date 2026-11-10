@@ -1,11 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { CSSProperties } from "react";
 import { profile } from "@/data/profile";
 import { strings } from "@/data/strings";
 import type { GithubSnapshot } from "@/lib/github";
+import { CountUp } from "./count-up";
 import { ArrowUpRight, Github, MapPin } from "./icons";
 import { useLocale } from "./locale";
+import { Magnetic } from "./magnetic";
 import { useMotionPref } from "./motion-pref";
 import { TypingLines } from "./typing-lines";
 
@@ -49,15 +52,19 @@ export function Hero({ github }: HeroProps) {
             {profile.name}
           </motion.p>
 
-          <motion.h1
+          <h1
             id="hero-title"
-            {...fade(0.1)}
-            className="font-heading text-[clamp(3.5rem,11vw,9.5rem)] leading-[0.85] tracking-tight uppercase"
+            className="hero-title font-heading text-[clamp(3.5rem,11vw,9.5rem)] leading-[0.85] tracking-tight uppercase"
           >
-            {firstLine}
-            <br />
-            <span className="text-primary">{secondLine}</span>
-          </motion.h1>
+            <span className="hero-line">
+              <span style={{ "--i": 0 } as CSSProperties}>{firstLine}</span>
+            </span>
+            <span className="hero-line">
+              <span className="text-primary" style={{ "--i": 1 } as CSSProperties}>
+                {secondLine}
+              </span>
+            </span>
+          </h1>
 
           <motion.p
             {...fade(0.2)}
@@ -67,25 +74,29 @@ export function Hero({ github }: HeroProps) {
           </motion.p>
 
           <motion.div {...fade(0.3)} className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-fg bg-fg px-8 py-3.5 text-lg font-semibold text-bg transition-all duration-300 hover:scale-105 hover:border-secondary hover:bg-secondary"
-            >
-              {t(strings.hero.ctaProjects)}
-              <ArrowUpRight className="size-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center rounded-full border-2 border-fg px-8 py-3.5 text-lg font-semibold text-fg transition-all duration-300 hover:border-primary hover:bg-[rgb(20_20_20/0.6)] hover:text-primary"
-            >
-              {t(strings.hero.ctaContact)}
-            </a>
+            <Magnetic>
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2 rounded-full border-2 border-fg bg-fg px-8 py-3.5 text-lg font-semibold text-bg transition-all duration-300 hover:scale-105 hover:border-secondary hover:bg-secondary active:scale-95"
+              >
+                {t(strings.hero.ctaProjects)}
+                <ArrowUpRight className="size-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href="#contact"
+                className="inline-flex items-center rounded-full border-2 border-fg px-8 py-3.5 text-lg font-semibold text-fg transition-all duration-300 hover:border-primary hover:bg-[rgb(20_20_20/0.6)] hover:text-primary active:scale-95"
+              >
+                {t(strings.hero.ctaContact)}
+              </a>
+            </Magnetic>
             <a
               href={profile.links.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="inline-flex size-[3.4rem] items-center justify-center rounded-full border border-line bg-white/5 text-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-primary hover:text-bg"
+              className="inline-flex size-[3.4rem] items-center justify-center rounded-full border border-line bg-white/5 text-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-primary hover:text-bg active:scale-95"
             >
               <Github />
             </a>
@@ -127,7 +138,7 @@ export function Hero({ github }: HeroProps) {
                   {t(strings.hero.repos)}
                 </dt>
                 <dd className="font-heading text-5xl leading-none text-primary">
-                  {github.totalRepos}
+                  <CountUp value={github.totalRepos} />
                 </dd>
               </div>
               <div className="glass flex flex-col-reverse gap-2 p-5">
@@ -135,7 +146,7 @@ export function Hero({ github }: HeroProps) {
                   {t(strings.hero.stars)}
                 </dt>
                 <dd className="font-heading text-5xl leading-none text-primary">
-                  {github.totalStars}
+                  <CountUp value={github.totalStars ?? 0} />
                 </dd>
               </div>
             </dl>

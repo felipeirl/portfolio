@@ -84,6 +84,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* aplica a escolha de movimento reduzido antes do primeiro desenho, sem piscar */}
         <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT_SCRIPT }} />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/pilares-hq.avif"
+          type="image/avif"
+          fetchPriority="high"
+        />
+        <noscript>
+          <style>{".bg-pillars::before{opacity:1!important}"}</style>
+        </noscript>
       </head>
       <body>
         {children}

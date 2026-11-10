@@ -10,8 +10,10 @@ import { Experience } from "./experience";
 import { Footer } from "./footer";
 import { Hero } from "./hero";
 import { LocaleProvider, useLocale } from "./locale";
+import { Marquee } from "./marquee";
 import { MotionPrefProvider } from "./motion-pref";
 import { Nav } from "./nav";
+import { PointerParallax } from "./pointer-parallax";
 import { Projects } from "./projects";
 import { Skills } from "./skills";
 
@@ -43,9 +45,11 @@ function Shell({ github }: PortfolioAppProps) {
         {t(strings.skipToContent)}
       </a>
       <Background />
+      <PointerParallax />
       <Nav onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
         <Hero github={github} />
+        <Marquee />
         <Skills />
         <Experience />
         <Projects github={github} />
