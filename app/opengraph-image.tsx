@@ -16,29 +16,30 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          backgroundColor: "#07090d",
+          backgroundColor: "#0a0a0a",
           backgroundImage:
-            "radial-gradient(circle at 15% 10%, rgba(124,77,255,0.35), transparent 50%), radial-gradient(circle at 90% 90%, rgba(0,229,255,0.25), transparent 50%)",
-          color: "#e6edf3",
+            "radial-gradient(circle at 85% 0%, rgba(255,202,137,0.35), transparent 55%), radial-gradient(circle at 0% 100%, rgba(255,234,208,0.12), transparent 50%)",
+          color: "#ffffff",
         }}
       >
-        <div style={{ fontSize: 28, color: "#00e5ff", fontFamily: "monospace", display: "flex" }}>
-          $ whoami
-        </div>
-        <div style={{ fontSize: 96, fontWeight: 700, marginTop: 24, display: "flex" }}>
+        <div style={{ fontSize: 40, color: "#ffca89", fontStyle: "italic", display: "flex" }}>
           {profile.name}
         </div>
         <div
           style={{
-            fontSize: 48,
-            marginTop: 12,
+            fontSize: 128,
+            fontWeight: 800,
+            lineHeight: 0.95,
+            marginTop: 16,
+            textTransform: "uppercase",
             display: "flex",
-            color: "#00e5ff",
+            flexDirection: "column",
           }}
         >
-          {profile.role.pt}
+          <span style={{ display: "flex" }}>Desenvolvedor</span>
+          <span style={{ display: "flex", color: "#ffca89" }}>Back-End</span>
         </div>
-        <div style={{ fontSize: 30, marginTop: 36, color: "#8b949e", display: "flex" }}>
+        <div style={{ fontSize: 30, marginTop: 40, color: "rgba(255,255,255,0.7)", display: "flex" }}>
           Go · REST APIs · Microsserviços · AWS · IA
         </div>
       </div>

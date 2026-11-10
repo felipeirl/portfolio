@@ -6,7 +6,7 @@ export interface SectionLink {
 }
 
 export const sectionLinks: SectionLink[] = [
-  { id: "skills", label: { pt: "Stack", en: "Stack" } },
+  { id: "skills", label: { pt: "Habilidades", en: "Skills" } },
   { id: "experience", label: { pt: "Experiência", en: "Experience" } },
   { id: "projects", label: { pt: "Projetos", en: "Projects" } },
   { id: "contact", label: { pt: "Contato", en: "Contact" } },
@@ -16,41 +16,49 @@ export const strings = {
   skipToContent: { pt: "Ir para o conteúdo", en: "Skip to content" },
   openPalette: { pt: "Abrir paleta de comandos", en: "Open command palette" },
   switchLanguage: { pt: "Mudar idioma", en: "Switch language" },
+  openMenu: { pt: "Abrir menu", en: "Open menu" },
+  closeMenu: { pt: "Fechar menu", en: "Close menu" },
+  mainNav: { pt: "Principal", en: "Main" },
   hero: {
-    greeting: { pt: "Olá, eu sou", en: "Hi, I am" },
+    tag: { pt: "Portfólio", en: "Portfolio" },
+    titleLines: {
+      pt: ["Desenvolvedor", "Back-End"],
+      en: ["Back-End", "Developer"],
+    } satisfies Record<"pt" | "en", string[]>,
     ctaProjects: { pt: "Ver projetos", en: "View projects" },
-    ctaContact: { pt: "Falar comigo", en: "Get in touch" },
+    ctaContact: { pt: "Entre em contato", en: "Get in touch" },
     available: { pt: "Aberto a oportunidades", en: "Open to opportunities" },
     repos: { pt: "repositórios", en: "repositories" },
     stars: { pt: "estrelas", en: "stars" },
-    based: { pt: "São Paulo, BR", en: "São Paulo, BR" },
+    scroll: { pt: "Role para ver mais", en: "Scroll for more" },
   },
   skills: {
-    eyebrow: { pt: "stack --list", en: "stack --list" },
-    title: { pt: "Ferramentas que uso no dia a dia", en: "The tools I use every day" },
+    eyebrow: { pt: "Stack técnica", en: "Tech stack" },
+    title: { pt: "Habilidades técnicas", en: "Technical skills" },
     subtitle: {
-      pt: "Back-end é o centro. O resto existe para entregar o produto de ponta a ponta.",
-      en: "Back-end is the core. The rest exists to ship the product end to end.",
+      pt: "Linguagens, ferramentas e tecnologias que uso e estudo atualmente. Back-end é o centro; o resto existe para entregar o produto de ponta a ponta.",
+      en: "Languages, tools and technologies I use and study today. Back-end is the core; the rest exists to ship the product end to end.",
     },
   },
   experience: {
-    eyebrow: { pt: "git log --career", en: "git log --career" },
-    title: { pt: "Experiência e formação", en: "Experience and education" },
+    eyebrow: { pt: "Trajetória", en: "Journey" },
+    title: { pt: "Experiência profissional", en: "Professional experience" },
     subtitle: {
-      pt: "Trabalho de verdade em produção, enquanto estudo.",
-      en: "Real work in production, while studying.",
+      pt: "Minha jornada no mercado de tecnologia: trabalho de verdade em produção, enquanto estudo.",
+      en: "My journey in tech: real work in production, while studying.",
     },
     work: { pt: "Trabalho", en: "Work" },
     study: { pt: "Formação", en: "Education" },
   },
   projects: {
-    eyebrow: { pt: "ls ./projetos", en: "ls ./projects" },
+    eyebrow: { pt: "Trabalhos", en: "Work" },
     title: { pt: "Projetos em destaque", en: "Featured projects" },
     subtitle: {
-      pt: "Código aberto, do back-end ao app. Números atualizados direto do GitHub.",
-      en: "Open source, from back-end to app. Numbers pulled live from GitHub.",
+      pt: "Visão de algumas aplicações construídas aplicando meus conhecimentos. Números atualizados direto do GitHub.",
+      en: "A look at some applications built with what I know. Numbers pulled live from GitHub.",
     },
     code: { pt: "Código", en: "Code" },
+    repo: { pt: "Ver repositório", en: "View repository" },
     updated: { pt: "Atualizado", en: "Updated" },
     allRepos: { pt: "Ver todos no GitHub", en: "See all on GitHub" },
     offline: {
@@ -59,7 +67,7 @@ export const strings = {
     },
   },
   contact: {
-    eyebrow: { pt: "contact --open", en: "contact --open" },
+    eyebrow: { pt: "Contato", en: "Contact" },
     title: { pt: "Vamos construir algo confiável?", en: "Let's build something reliable?" },
     subtitle: {
       pt: "Aberto a conversas sobre back-end, APIs e IA aplicada.",
@@ -69,6 +77,13 @@ export const strings = {
     github: { pt: "Ver o GitHub", en: "View GitHub" },
   },
   footer: {
+    tagline: {
+      pt: "Desenvolvedor back-end focado em criar APIs resilientes, resolver gargalos de performance e construir modelagem de dados escalável.",
+      en: "Back-end developer focused on building resilient APIs, fixing performance bottlenecks and designing scalable data models.",
+    },
+    pages: { pt: "Páginas", en: "Pages" },
+    social: { pt: "Redes", en: "Social" },
+    rights: { pt: "Todos os direitos reservados.", en: "All rights reserved." },
     built: { pt: "Feito com Next.js, TypeScript e Tailwind.", en: "Built with Next.js, TypeScript and Tailwind." },
     top: { pt: "Voltar ao topo", en: "Back to top" },
   },
@@ -82,4 +97,4 @@ export const strings = {
     close: { pt: "Fechar", en: "Close" },
     hint: { pt: "↑↓ navegar · Enter selecionar · Esc fechar", en: "↑↓ navigate · Enter select · Esc close" },
   },
-} satisfies Record<string, unknown>;
+};

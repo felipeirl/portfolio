@@ -1,7 +1,7 @@
 export type Locale = "pt" | "en";
 export type Localized = Record<Locale, string>;
 
-export const SITE_URL = "https://felipeirl.vercel.app";
+export const SITE_URL = "https://felipejorge.vercel.app";
 
 export const profile = {
   name: "Felipe Jorge",

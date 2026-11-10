@@ -10,52 +10,47 @@ export function Contact() {
   const { t } = useLocale();
 
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-title"
-      className="mx-auto max-w-6xl px-5 py-24 sm:px-8"
-    >
-      <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-line bg-surface/70 p-10 text-center sm:p-16">
-          <div
-            aria-hidden
-            className="absolute inset-0 -z-10 bg-[radial-gradient(60%_80%_at_50%_0%,rgb(124_77_255/0.25),transparent_70%)]"
-          />
-          <p className="mb-3 font-mono text-sm text-cyan">
-            <span className="text-muted">$ </span>
-            {t(strings.contact.eyebrow)}
-          </p>
-          <h2
-            id="contact-title"
-            className="mx-auto max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl"
-          >
-            {t(strings.contact.title)}
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-muted">{t(strings.contact.subtitle)}</p>
+    <section id="contact" aria-labelledby="contact-title" className="py-32">
+      <div className="mx-auto w-[90%] max-w-5xl">
+        <Reveal>
+          <div className="glass p-10 text-center sm:p-16">
+            <p className="mb-3 font-accent text-2xl text-primary italic sm:text-3xl">
+              {t(strings.contact.eyebrow)}
+            </p>
+            <h2
+              id="contact-title"
+              className="mx-auto max-w-3xl font-heading text-5xl leading-none uppercase sm:text-6xl lg:text-7xl"
+            >
+              {t(strings.contact.title)}
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-muted">
+              {t(strings.contact.subtitle)}
+            </p>
 
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <a
-              href={profile.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-xl bg-cyan px-6 py-3 font-medium text-bg transition-all hover:bg-white hover:shadow-[0_0_32px_rgb(0_229_255/0.35)]"
-            >
-              <Linkedin className="size-5" />
-              {t(strings.contact.linkedin)}
-              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
-            <a
-              href={profile.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-line bg-bg/60 px-6 py-3 font-medium transition-colors hover:border-cyan/50"
-            >
-              <Github className="size-5" />
-              {t(strings.contact.github)}
-            </a>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <a
+                href={profile.links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 rounded-full border-2 border-fg bg-fg px-8 py-3.5 text-lg font-semibold text-bg transition-all duration-300 hover:scale-105 hover:border-secondary hover:bg-secondary"
+              >
+                <Linkedin className="size-5" />
+                {t(strings.contact.linkedin)}
+                <ArrowUpRight className="size-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 rounded-full border-2 border-fg px-8 py-3.5 text-lg font-semibold text-fg transition-all duration-300 hover:border-primary hover:text-primary"
+              >
+                <Github className="size-5" />
+                {t(strings.contact.github)}
+              </a>
+            </div>
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

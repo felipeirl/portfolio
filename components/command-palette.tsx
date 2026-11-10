@@ -127,7 +127,7 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
             aria-modal="true"
             aria-label={t(strings.openPalette)}
             onKeyDown={onKeyDown}
-            className="w-full max-w-xl overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl"
+            className="glass w-full max-w-xl overflow-hidden bg-surface/90 shadow-2xl"
             initial={{ opacity: 0, y: -12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
@@ -170,7 +170,7 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
                     onMouseMove={() => setCursor(index)}
                     onClick={() => runCommand(command)}
                     className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
-                      index === cursor ? "bg-cyan/10 text-cyan" : "text-fg"
+                      index === cursor ? "bg-primary/10 text-primary" : "text-fg"
                     }`}
                   >
                     {command.icon}

@@ -1,9 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import { profile, SITE_URL } from "@/data/profile";
 import "./globals.css";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans", display: "swap" });
+const montreal = localFont({
+  src: "./fonts/NeueMontreal-Medium.otf",
+  weight: "500",
+  variable: "--font-montreal",
+  display: "swap",
+});
+const tusker = localFont({
+  src: "./fonts/TuskerGrotesk-3600Semibold.otf",
+  weight: "700",
+  variable: "--font-tusker",
+  display: "swap",
+});
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
@@ -40,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07090d",
+  themeColor: "#0a0a0a",
   colorScheme: "dark",
 };
 
@@ -56,7 +74,10 @@ const personJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${geist.variable} ${jetbrains.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${montreal.variable} ${tusker.variable} ${playfair.variable} ${jetbrains.variable}`}
+    >
       <body>
         {children}
         <script

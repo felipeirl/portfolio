@@ -5,19 +5,28 @@ interface SectionHeadingProps {
   eyebrow: string;
   title: string;
   subtitle: string;
+  align?: "left" | "center";
 }
 
-export function SectionHeading({ id, eyebrow, title, subtitle }: SectionHeadingProps) {
+export function SectionHeading({
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  align = "left",
+}: SectionHeadingProps) {
+  const centered = align === "center";
+
   return (
-    <Reveal className="mb-12 max-w-2xl">
-      <p className="mb-3 font-mono text-sm text-cyan">
-        <span className="text-muted">$ </span>
-        {eyebrow}
-      </p>
-      <h2 id={id} className="text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
+    <Reveal className={`mb-14 max-w-3xl ${centered ? "mx-auto text-center" : ""}`}>
+      <p className="mb-3 font-accent text-2xl italic text-primary sm:text-3xl">{eyebrow}</p>
+      <h2
+        id={id}
+        className="font-heading text-5xl uppercase leading-none sm:text-6xl lg:text-7xl"
+      >
         {title}
       </h2>
-      <p className="mt-4 text-lg leading-relaxed text-muted">{subtitle}</p>
+      <p className="mt-6 text-lg leading-relaxed text-muted">{subtitle}</p>
     </Reveal>
   );
 }
