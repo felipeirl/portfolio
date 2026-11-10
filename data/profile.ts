@@ -43,7 +43,7 @@ export interface SkillGroup {
   id: string;
   title: Localized;
   blurb: Localized;
-  /** ids do skillicons.dev */
+  /** ids dos ícones em public/icons */
   icons: string[];
   labels: string[];
 }
@@ -152,7 +152,7 @@ export interface FeaturedProject {
   title: string;
   description: Localized;
   stack: string[];
-  /** ids do skillicons.dev */
+  /** ids dos ícones em public/icons */
   icons: string[];
   demo?: string;
 }

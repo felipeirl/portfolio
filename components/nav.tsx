@@ -7,7 +7,8 @@ import { sectionLinks, strings } from "@/data/strings";
 import { Languages, Search } from "./icons";
 import { useLocale } from "./locale";
 
-const ACTIVE_LINE_RATIO = 0.35;
+const ACTIVE_LINE_PERCENT = 35;
+const READING_BAND_PERCENT = 1;
 const MONOGRAM_LETTERS = 2;
 
 const monogram = profile.name
@@ -34,19 +35,21 @@ export function Nav({ onOpenPalette }: NavProps) {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
   useEffect(() => {
-    const onScroll = () => {
-      // seção ativa = a última cujo topo já passou da linha de leitura
-      const readingLine = window.innerHeight * ACTIVE_LINE_RATIO;
-      let current = "";
-      for (const link of sectionLinks) {
-        const node = document.getElementById(link.id);
-        if (node && node.getBoundingClientRect().top <= readingLine) current = link.id;
-      }
-      setActive(current);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    // Faixa fina na linha de leitura: a seção que a cruza é a ativa. Sem JS por scroll.
+    const bottomMargin = 100 - ACTIVE_LINE_PERCENT - READING_BAND_PERCENT;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id === "top" ? "" : entry.target.id);
+        }
+      },
+      { rootMargin: `-${ACTIVE_LINE_PERCENT}% 0px -${bottomMargin}% 0px` },
+    );
+    for (const id of ["top", ...sectionLinks.map((link) => link.id)]) {
+      const node = document.getElementById(id);
+      if (node) observer.observe(node);
+    }
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
