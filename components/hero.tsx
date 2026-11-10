@@ -10,7 +10,7 @@ import { ArrowUpRight, Github, MapPin } from "./icons";
 import { useLocale } from "./locale";
 import { Magnetic } from "./magnetic";
 import { useMotionPref } from "./motion-pref";
-import { TypingLines } from "./typing-lines";
+import { Terminal } from "./terminal";
 
 interface HeroProps {
   github: Pick<GithubSnapshot, "live" | "totalRepos" | "totalStars">;
@@ -104,32 +104,7 @@ export function Hero({ github }: HeroProps) {
         </div>
 
         <motion.div {...fade(0.25)} className="space-y-5">
-          <div aria-hidden className="glass overflow-hidden">
-            <div className="flex items-center gap-2 border-b border-line px-5 py-3.5">
-              <span className="size-3 rounded-full bg-[#ff5f56]" />
-              <span className="size-3 rounded-full bg-[#ffbd2e]" />
-              <span className="size-3 rounded-full bg-[#27c93f]" />
-              <span className="ml-3 font-mono text-xs text-muted">felipe@portfolio:~</span>
-            </div>
-            <div className="space-y-3 p-6 font-mono text-sm leading-relaxed">
-              <p>
-                <span className="text-primary">$</span> whoami
-              </p>
-              <p className="text-muted">
-                {profile.name} — {t(profile.role)}
-              </p>
-              <p>
-                <span className="text-primary">$</span> cat focus.txt
-              </p>
-              <p className="min-h-[1.5em] text-fg">
-                <TypingLines lines={profile.typing[locale]} />
-              </p>
-              <p>
-                <span className="text-primary">$</span> echo $PHILOSOPHY
-              </p>
-              <p className="text-muted">{t(profile.headline)}</p>
-            </div>
-          </div>
+          <Terminal />
 
           {github.live && github.totalRepos !== null && (
             <dl className="grid grid-cols-2 gap-4">
