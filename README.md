@@ -49,3 +49,8 @@ Textos, links, stack, experiência e projetos em destaque ficam em [`data/profil
 ## Versão anterior
 
 O site em HTML, CSS e JavaScript puros está preservado em [`_archive/legacy`](_archive/legacy).
+
+## Medição e privacidade
+
+- **Vercel Analytics e Speed Insights** coletam visitas e métricas reais de desempenho (LCP, INP, CLS) sem cookies. Precisam ser ativados no painel da Vercel (aba Analytics e aba Speed Insights) para aparecerem dados.
+- **Lighthouse CI** roda em cada PR para a `main` (`.github/workflows/lighthouse.yml`, limites em `lighthouserc.json`): LCP abaixo de 2,0 s, JS inicial abaixo de 175 KB, acessibilidade e SEO acima de 95. Desempenho, LCP, CLS, TBT e tamanho de JS avisam; acessibilidade e SEO reprovam o PR.
