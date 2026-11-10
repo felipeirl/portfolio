@@ -6,16 +6,21 @@ interface TechIconProps {
   size?: number;
 }
 
-/** Ícones do skillicons.dev: todos no mesmo formato. Em cinza até o hover. */
+/**
+ * Ícones do skillicons.dev (MIT) servidos de public/icons: todos no mesmo formato,
+ * em cinza até o hover. Carregamento imediato para não disparar rede durante a rolagem.
+ */
 export function TechIcon({ id, label, size = 48 }: TechIconProps) {
   return (
     <Image
-      src={`https://skillicons.dev/icons?i=${id}&theme=dark`}
+      src={`/icons/${id}.svg`}
       alt={label}
       title={label}
       width={size}
       height={size}
       unoptimized
+      loading="eager"
+      decoding="async"
       className="skill-icon rounded-xl"
     />
   );
