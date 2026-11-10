@@ -4,8 +4,9 @@ import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 import { sectionLinks, strings } from "@/data/strings";
-import { Languages, Search } from "./icons";
+import { Languages, Search, Zap, ZapOff } from "./icons";
 import { useLocale } from "./locale";
+import { useMotionPref } from "./motion-pref";
 
 const ACTIVE_LINE_PERCENT = 35;
 const READING_BAND_PERCENT = 1;
@@ -28,6 +29,7 @@ interface NavProps {
 /** Navegação N2: pílula flutuante central. No celular vira logo + idioma + menu. */
 export function Nav({ onOpenPalette }: NavProps) {
   const { locale, t, toggleLocale } = useLocale();
+  const { reduced: motionReduced, toggle: toggleMotion } = useMotionPref();
   const [active, setActive] = useState<string>("");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -131,6 +133,16 @@ export function Nav({ onOpenPalette }: NavProps) {
             >
               <Languages className="size-4" />
               {locale.toUpperCase()}
+            </button>
+            <button
+              type="button"
+              onClick={toggleMotion}
+              aria-pressed={motionReduced}
+              aria-label={t(strings.motion.reduce)}
+              title={t(motionReduced ? strings.motion.restore : strings.motion.reduce)}
+              className={iconButton}
+            >
+              {motionReduced ? <ZapOff className="size-4" /> : <Zap className="size-4" />}
             </button>
           </div>
 

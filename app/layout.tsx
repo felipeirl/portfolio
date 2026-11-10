@@ -28,6 +28,8 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
+const MOTION_BOOT_SCRIPT = `try{if(localStorage.getItem("portfolio-motion")==="reduced")document.documentElement.dataset.motion="reduced"}catch(e){}`;
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? SITE_URL;
 const description = `${profile.role.pt}. ${profile.headline.pt}`;
 
@@ -76,8 +78,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${montreal.variable} ${tusker.variable} ${playfair.variable} ${jetbrains.variable}`}
     >
+      <head>
+        {/* aplica a escolha de movimento reduzido antes do primeiro desenho, sem piscar */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT_SCRIPT }} />
+      </head>
       <body>
         {children}
         <script

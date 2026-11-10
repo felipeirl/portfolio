@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMotionPref } from "./motion-pref";
 
 interface TypingLinesProps {
   lines: string[];
@@ -16,11 +17,7 @@ export function TypingLines({ lines }: TypingLinesProps) {
   const [lineIndex, setLineIndex] = useState(0);
   const [visible, setVisible] = useState(0);
   const [deleting, setDeleting] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    setReduceMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+  const { reduced: reduceMotion } = useMotionPref();
 
   useEffect(() => {
     setLineIndex(0);

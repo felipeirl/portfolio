@@ -4,8 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { profile } from "@/data/profile";
 import { sectionLinks, strings } from "@/data/strings";
-import { Github, Languages, Linkedin, Search } from "./icons";
+import { Github, Languages, Linkedin, Search, Zap, ZapOff } from "./icons";
 import { useLocale } from "./locale";
+import { useMotionPref } from "./motion-pref";
 
 interface CommandPaletteProps {
   open: boolean;
@@ -22,6 +23,7 @@ interface Command {
 
 export function CommandPalette({ open, onClose }: CommandPaletteProps) {
   const { t, toggleLocale } = useLocale();
+  const { reduced: motionReduced, toggle: toggleMotion } = useMotionPref();
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,8 +63,15 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
         icon: <Languages className="size-4" />,
         run: toggleLocale,
       },
+      {
+        id: "toggle-motion",
+        group: t(strings.palette.settings),
+        label: t(motionReduced ? strings.motion.restore : strings.motion.reduce),
+        icon: motionReduced ? <Zap className="size-4" /> : <ZapOff className="size-4" />,
+        run: toggleMotion,
+      },
     ];
-  }, [t, toggleLocale]);
+  }, [t, toggleLocale, motionReduced, toggleMotion]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
