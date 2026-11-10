@@ -2,7 +2,7 @@
 
 import { skillGroups } from "@/data/profile";
 import { strings } from "@/data/strings";
-import { trackSpotlight } from "@/lib/use-spotlight";
+import { resetTilt, trackSpotlight } from "@/lib/use-spotlight";
 import { useLocale } from "./locale";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
@@ -33,7 +33,8 @@ export function Skills() {
             <Reveal key={group.id} delay={index * 0.05} className={SPAN_BY_INDEX[index] ?? ""}>
               <article
                 onMouseMove={trackSpotlight}
-                className="glass glass-hover spotlight h-full p-8"
+                onMouseLeave={resetTilt}
+                className="glass tilt spotlight h-full p-8"
               >
                 <h3 className="font-accent text-2xl text-primary italic">{t(group.title)}</h3>
                 <p className="mt-2 min-h-12 leading-relaxed text-muted">{t(group.blurb)}</p>

@@ -1,30 +1,24 @@
-"use client";
-
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
-import { useMotionPref } from "./motion-pref";
+import type { CSSProperties, ReactNode } from "react";
 
 interface RevealProps {
   children: ReactNode;
+  /** Atraso em fração da faixa de entrada (0.08 desloca o início em 8%). */
   delay?: number;
   className?: string;
 }
 
-const REVEAL_OFFSET_PX = 24;
-const REVEAL_DURATION_S = 0.6;
+const PERCENT = 100;
 
+/**
+ * Entrada guiada pelo scroll em CSS (animation-timeline: view()). Sem JavaScript por quadro;
+ * em navegadores sem suporte o conteúdo simplesmente aparece, sem animação.
+ */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
-  const { reduced: reduceMotion } = useMotionPref();
+  const style = delay ? ({ "--reveal-delay": `${delay * PERCENT}%` } as CSSProperties) : undefined;
 
   return (
-    <motion.div
-      className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: REVEAL_OFFSET_PX }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: REVEAL_DURATION_S, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <div className={`reveal ${className ?? ""}`} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }

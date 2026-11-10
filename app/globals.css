@@ -75,7 +75,17 @@ h4 {
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
-  border-radius: 6px;
+}
+
+button:not(:disabled),
+[role="button"] {
+  cursor: pointer;
+}
+
+/* transição suave ao trocar de idioma (View Transitions) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
 }
 
 /* Movimento reduzido por escolha da pessoa, pelo botão do menu. O padrão é animar. */
@@ -89,6 +99,18 @@ html[data-motion="reduced"] *::after {
   animation-iteration-count: 1 !important;
   transition-duration: 0.01ms !important;
 }
+html[data-motion="reduced"] .reveal,
+html[data-motion="reduced"] .split-word > span,
+html[data-motion="reduced"] .hero-line > span,
+html[data-motion="reduced"] .marquee-track,
+html[data-motion="reduced"] .bg-pillars {
+  animation: none !important;
+}
+html[data-motion="reduced"] .tilt,
+html[data-motion="reduced"] .pointer-parallax .bg-pillars-top,
+html[data-motion="reduced"] .pointer-parallax .hero-title {
+  transform: none !important;
+}
 
 /* fundo: Pilares da Criação, uma cópia no topo e outra espelhada na base */
 .bg-pillars {
@@ -96,6 +118,18 @@ html[data-motion="reduced"] *::after {
   left: 0;
   width: 100%;
   height: 50%;
+  background-image: url("data:image/jpeg;base64,/9j/2wBDABUVFRUWFRgaGhghIx8jITAtKSktMEk0ODQ4NElvRVFFRVFFb2J3YVphd2Kxi3t7i7HMrKKszPjd3fj/////////2wBDARUVFRUWFRgaGhghIx8jITAtKSktMEk0ODQ4NElvRVFFRVFFb2J3YVphd2Kxi3t7i7HMrKKszPjd3fj/////////wgARCABFABwDASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAgQAAQMFBv/EABgBAAMBAQAAAAAAAAAAAAAAAAIDBAEA/9oADAMBAAIQAxAAAADzV08XCi2oQtaGCH4LENE/TWYuWrm1oFUu+qzi2ZpvJmBSTOZVk3P/xAAkEAACAgEEAgEFAAAAAAAAAAABAgARAxIhMUEEEBMjQlGBkf/aAAgBAQABPwCKpYgLKTE2l0DbbjuGVPEyHHkC9ERhyW5/MY2xJmLGRuw3qfG5XUooruRHYUB33DCFC6uSTuAY2SiwRrFQnuXMm6A1yKvveBWUtqsQwGvtuBr4IImlXV3Zuv6Yy0fSMUFciD6rIgjgkVfHEOx9eLkxI9uDdUJkBxsVBsdGNRJridfozqLm+MgldRra43M//8QAHREBAAMAAQUAAAAAAAAAAAAAAQACERIDECExQf/aAAgBAgEBPwCzxFyGfJW/KAZk6Y5kKy244eYCGdj0T//EABsRAQEBAAIDAAAAAAAAAAAAAAEAEQJBECEx/9oACAEDAQE/AA1ne54ATq7ckljoX1Lvh+3/2Q==");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+  filter: saturate(0.8) contrast(1.1);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+.bg-pillars::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-image: url("/images/pilares-hq.jpg");
   background-image: image-set(
     url("/images/pilares-hq.avif") type("image/avif"),
@@ -104,9 +138,11 @@ html[data-motion="reduced"] *::after {
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-  opacity: 0.75;
-  filter: saturate(0.8) contrast(1.1);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+html.bg-ready .bg-pillars::before {
+  opacity: 1;
 }
 .bg-pillars-bottom {
   bottom: 0;
@@ -114,6 +150,125 @@ html[data-motion="reduced"] *::after {
 }
 .bg-pillars-top {
   top: 0;
+}
+
+/* profundidade: o fundo anda mais devagar que o conteúdo, guiado pelo scroll */
+@supports (animation-timeline: scroll()) {
+  .bg-pillars-top {
+    animation: depth-down linear both;
+    animation-timeline: scroll(root);
+  }
+  .bg-pillars-bottom {
+    animation: depth-up linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes depth-down {
+  to {
+    translate: 0 var(--depth, 180px);
+  }
+}
+@keyframes depth-up {
+  from {
+    translate: 0 calc(var(--depth, 180px) * -1);
+  }
+}
+
+/* paralaxe do mouse no topo da página (ponteiro fino, ligado por PointerParallax) */
+.pointer-parallax .bg-pillars-top {
+  transform: translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0) scale(1.03);
+  transition: transform 0.35s ease-out;
+}
+.pointer-parallax .hero-title {
+  transform: translate3d(calc(var(--mx, 0) * 8px), calc(var(--my, 0) * 5px), 0);
+  transition: transform 0.35s ease-out;
+}
+
+/* revelações guiadas pelo scroll, sem JavaScript por quadro */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    animation-range: entry var(--reveal-delay, 0%) entry calc(55% + var(--reveal-delay, 0%));
+  }
+  .split-word > span {
+    animation: word-up linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 5%) entry calc(60% + var(--i, 0) * 5%);
+  }
+}
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes word-up {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* títulos: cada palavra sobe de dentro de uma máscara */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+.split-word > span {
+  display: inline-block;
+}
+
+/* hero: cada linha do título sobe ao carregar */
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.06em;
+  margin-block: -0.06em;
+}
+.hero-line > span {
+  display: block;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.12s + 0.1s);
+}
+
+/* faixa contínua da stack: duas trilhas idênticas, cada uma anda 100% */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.marquee-track {
+  display: flex;
+  flex: none;
+  gap: 12px;
+  padding-right: 12px;
+  animation: marquee 56s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 /* cartão de vidro */
@@ -131,6 +286,18 @@ html[data-motion="reduced"] *::after {
 }
 .glass-hover:hover {
   transform: translateY(-5px);
+  border-color: rgb(255 202 137 / 0.3);
+}
+.tilt {
+  transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
+  transition:
+    transform 0.18s ease-out,
+    border-color 0.4s ease,
+    background-color 0.4s ease;
+}
+.tilt:hover {
+  --lift: -5px;
   border-color: rgb(255 202 137 / 0.3);
 }
 

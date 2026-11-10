@@ -3,7 +3,7 @@
 import { featuredProjects, profile } from "@/data/profile";
 import { strings } from "@/data/strings";
 import type { GithubSnapshot } from "@/lib/github";
-import { trackSpotlight } from "@/lib/use-spotlight";
+import { resetTilt, trackSpotlight } from "@/lib/use-spotlight";
 import { ArrowUpRight, Github, Star } from "./icons";
 import { useLocale } from "./locale";
 import { Reveal } from "./reveal";
@@ -46,7 +46,8 @@ export function Projects({ github }: ProjectsProps) {
               <Reveal key={project.repo} delay={(index % 2) * 0.08}>
                 <article
                   onMouseMove={trackSpotlight}
-                  className="glass glass-hover spotlight flex h-full flex-col p-8"
+                  onMouseLeave={resetTilt}
+                  className="glass tilt spotlight flex h-full flex-col p-8"
                 >
                   <header className="flex items-start justify-between gap-4">
                     <div className="flex gap-2">
@@ -64,7 +65,7 @@ export function Projects({ github }: ProjectsProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${t(strings.projects.code)}: ${project.title}`}
-                      className="rounded-full border border-line bg-white/5 p-2.5 text-lg transition-all duration-300 hover:bg-primary hover:text-bg"
+                      className="rounded-full border border-line bg-white/5 p-2.5 text-lg transition-all duration-300 hover:bg-primary hover:text-bg active:scale-90"
                     >
                       <ArrowUpRight />
                     </a>

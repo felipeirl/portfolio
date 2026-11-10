@@ -1,4 +1,5 @@
 import { Reveal } from "./reveal";
+import { SplitTitle } from "./split-title";
 
 interface SectionHeadingProps {
   id: string;
@@ -24,7 +25,7 @@ export function SectionHeading({
         id={id}
         className="font-heading text-5xl uppercase leading-none sm:text-6xl lg:text-7xl"
       >
-        {title}
+        <SplitTitle text={title} />
       </h2>
       <p className="mt-6 text-lg leading-relaxed text-muted">{subtitle}</p>
     </Reveal>

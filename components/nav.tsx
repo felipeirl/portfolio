@@ -69,7 +69,7 @@ export function Nav({ onOpenPalette }: NavProps) {
   }, [menuOpen]);
 
   const iconButton =
-    "flex size-10 items-center justify-center gap-1.5 rounded-full text-sm text-muted transition-colors hover:bg-white/10 hover:text-fg";
+    "flex size-10 items-center justify-center gap-1.5 rounded-full text-sm text-muted transition-all hover:bg-white/10 hover:text-fg active:scale-90";
 
   return (
     <>
@@ -150,7 +150,7 @@ export function Nav({ onOpenPalette }: NavProps) {
             href={profile.links.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-0.5 hidden whitespace-nowrap rounded-full bg-white px-5 py-2.5 text-sm font-medium text-bg transition-colors hover:bg-secondary md:block"
+            className="ml-0.5 hidden whitespace-nowrap rounded-full bg-white px-5 py-2.5 text-sm font-medium text-bg transition-all hover:bg-secondary active:scale-95 md:block"
           >
             {contactLabel ? t(contactLabel) : "LinkedIn"}
           </a>

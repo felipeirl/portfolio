@@ -6,7 +6,7 @@ import { Github, Linkedin } from "./icons";
 import { useLocale } from "./locale";
 
 const socialLink =
-  "flex size-[50px] items-center justify-center rounded-full border border-transparent bg-white/5 text-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 hover:bg-primary hover:text-bg";
+  "flex size-[50px] items-center justify-center rounded-full border border-transparent bg-white/5 text-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-1 hover:bg-primary hover:text-bg active:scale-90";
 
 export function Footer() {
   const { t } = useLocale();
