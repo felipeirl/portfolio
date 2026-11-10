@@ -27,7 +27,7 @@ export function Footer() {
               {sectionLinks.map((link) => (
                 <li key={link.id}>
                   <a
-                    href={`#${link.id}`}
+                    href={`/#${link.id}`}
                     className="text-muted transition-colors hover:text-primary"
                   >
                     {t(link.label)}

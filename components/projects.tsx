@@ -1,5 +1,6 @@
 "use client";
 
+import { caseSlugForRepo } from "@/data/cases";
 import { featuredProjects, profile } from "@/data/profile";
 import { strings } from "@/data/strings";
 import type { GithubSnapshot } from "@/lib/github";
@@ -39,7 +40,9 @@ export function Projects({ github }: ProjectsProps) {
           </p>
         )}
 
-        <div className="grid gap-6 md:grid-cols-2">
+        {github.live && github.activity && <ActivityBlock github={github} formatDate={formatDate} />}
+
+      <div className="grid gap-6 md:grid-cols-2">
           {featuredProjects.map((project, index) => {
             const live = github.projects[project.repo];
             return (
@@ -96,6 +99,14 @@ export function Projects({ github }: ProjectsProps) {
                     >
                       {t(strings.projects.repo)} <span aria-hidden>→</span>
                     </a>
+                    {caseSlugForRepo(project.repo) && (
+                      <a
+                        href={`/projetos/${caseSlugForRepo(project.repo)}`}
+                        className="inline-flex items-center gap-2 font-semibold text-secondary transition-all duration-300 hover:gap-4 hover:text-primary"
+                      >
+                        {t(strings.projects.caseStudy)} <span aria-hidden>→</span>
+                      </a>
+                    )}
                     {github.live && (
                       <span className="ml-auto inline-flex items-center gap-4 text-muted">
                         <span className="inline-flex items-center gap-1">
@@ -130,5 +141,47 @@ export function Projects({ github }: ProjectsProps) {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+const SPARK_W = 280;
+const SPARK_H = 48;
+
+function ActivityBlock({
+  github,
+  formatDate,
+}: {
+  github: GithubSnapshot;
+  formatDate: (iso: string) => string;
+}) {
+  const { t } = useLocale();
+  const days = github.activity ?? [];
+  const max = Math.max(1, ...days);
+  const step = SPARK_W / Math.max(1, days.length - 1);
+  const points = days.map((count, i) => `${(i * step).toFixed(1)},${(SPARK_H - (count / max) * (SPARK_H - 6) - 3).toFixed(1)}`);
+
+  return (
+    <div className="glass mb-6 flex flex-wrap items-center justify-between gap-6 p-6">
+      <div>
+        <p className="font-mono text-xs tracking-widest text-muted uppercase">
+          {t(strings.projects.activity)}
+        </p>
+        <svg
+          viewBox={`0 0 ${SPARK_W} ${SPARK_H}`}
+          role="img"
+          aria-label={`${t(strings.projects.activity)}: ${days.join(", ")}`}
+          className="mt-3 h-12 w-72 max-w-full"
+        >
+          <polyline points={points.join(" ")} fill="none" stroke="#ffca89" strokeWidth="2" strokeLinejoin="round" />
+        </svg>
+      </div>
+      {github.latest && (
+        <p className="text-sm text-muted">
+          {t(strings.projects.latestPush)}: <span className="text-fg">{github.latest.repo}</span>
+          {" · "}
+          {formatDate(github.latest.pushedAt)}
+        </p>
+      )}
+    </div>
   );
 }

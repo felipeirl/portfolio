@@ -123,15 +123,25 @@ export const experiences: Experience[] = [
   {
     company: "PicPay",
     role: {
-      pt: "Assistente de Desenvolvimento",
-      en: "Development Assistant",
+      pt: "Assistente de Desenvolvimento (Back-end)",
+      en: "Development Assistant (Back-end)",
     },
-    period: { pt: "out 2025 — atual", en: "Oct 2025 — present" },
+    period: { pt: "fev 2026 — atual", en: "Feb 2026 — present" },
     description: {
-      pt: "Atuo na área de e-commerce (Shop), ajudando no desenvolvimento e na manutenção de sistemas internos.",
-      en: "I work in the e-commerce area (Shop), helping develop and maintain internal systems.",
+      pt: "Squad Shop E2E, no fluxo de compra do marketplace do app. Desenvolvo e mantenho microsserviços em Go para e-commerce, com MongoDB e Redis, entrego código em produção com code review como autor e revisor, e trabalho com CI/CD em GitHub Actions e deploy em Kubernetes via GitOps (ArgoCD) na AWS.",
+      en: "Shop E2E squad, on the marketplace purchase flow of the app. I build and maintain Go microservices for e-commerce with MongoDB and Redis, ship code to production with code review as author and reviewer, and work with CI/CD on GitHub Actions and Kubernetes deployments via GitOps (ArgoCD) on AWS.",
     },
-    tags: ["E-commerce", "Sistemas internos"],
+    tags: ["Go", "MongoDB", "Redis", "Kubernetes", "ArgoCD", "GitHub Actions", "AWS"],
+  },
+  {
+    company: "PicPay",
+    role: { pt: "Auxiliar de TI", en: "IT Assistant" },
+    period: { pt: "out 2025 — fev 2026", en: "Oct 2025 — Feb 2026" },
+    description: {
+      pt: "Onboarding técnico na stack do squad: Go, MongoDB, Docker, arquitetura de microsserviços e fluxo de entrega.",
+      en: "Technical onboarding on the squad stack: Go, MongoDB, Docker, microservices architecture and the delivery workflow.",
+    },
+    tags: ["Go", "MongoDB", "Docker"],
   },
 ];
 
@@ -143,8 +153,11 @@ export interface Education {
 
 export const education: Education = {
   school: "Instituto J&F — Germinare Tech",
-  program: { pt: "Formação técnica", en: "Technical program" },
-  period: { pt: "conclusão em 2027", en: "graduating in 2027" },
+  program: {
+    pt: "Técnico em Tecnologia da Informação",
+    en: "Technical Diploma in Information Technology",
+  },
+  period: { pt: "conclusão prevista: dez 2027", en: "expected graduation: Dec 2027" },
 };
 
 export interface FeaturedProject {

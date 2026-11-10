@@ -353,3 +353,8 @@ html.bg-ready .bg-pillars::before {
   border-radius: 8px;
   border: 2px solid var(--color-bg);
 }
+
+/* Lenis assume o scroll suave: o CSS nativo precisa ficar automático */
+html.lenis-on {
+  scroll-behavior: auto !important;
+}
