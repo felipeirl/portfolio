@@ -11,8 +11,12 @@ interface MagneticProps {
   reach?: number;
 }
 
-const DEFAULT_PULL = 0.3;
-const DEFAULT_REACH_PX = 110;
+const DEFAULT_PULL = 0.2;
+const DEFAULT_REACH_PX = 60;
+/** Deslocamento máximo, para botões vizinhos não se sobreporem. */
+const MAX_SHIFT_PX = 8;
+
+const clamp = (value: number) => Math.max(-MAX_SHIFT_PX, Math.min(MAX_SHIFT_PX, value));
 
 /** O elemento se aproxima do cursor ao chegar perto e volta ao largar. Só com ponteiro fino. */
 export function Magnetic({ children, pull = DEFAULT_PULL, reach = DEFAULT_REACH_PX }: MagneticProps) {
@@ -38,7 +42,7 @@ export function Magnetic({ children, pull = DEFAULT_PULL, reach = DEFAULT_REACH_
       const dy = pointer.clientY - (rect.top + rect.height / 2);
       const limit = reach + Math.max(rect.width, rect.height) / 2;
       mover.style.transform =
-        Math.hypot(dx, dy) < limit ? `translate3d(${dx * pull}px, ${dy * pull}px, 0)` : "";
+        Math.hypot(dx, dy) < limit ? `translate3d(${clamp(dx * pull)}px, ${clamp(dy * pull)}px, 0)` : "";
     };
 
     const onMove = (event: PointerEvent) => {

@@ -358,3 +358,9 @@ html.bg-ready .bg-pillars::before {
 html.lenis-on {
   scroll-behavior: auto !important;
 }
+
+/* Lenis: regras mínimas do lenis.css */
+html.lenis-on,
+html.lenis-on body {
+  height: auto;
+}
