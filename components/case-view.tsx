@@ -87,7 +87,7 @@ function Body({ item }: { item: CaseStudy }) {
         {item.repos.map((repo) => (
           <a
             key={repo.name}
-            href={`${profile.links.github}/${repo.name}`}
+            href={`https://github.com/${repo.owner ?? profile.handle}/${repo.name}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border-2 border-fg px-6 py-3 font-semibold transition-colors hover:border-primary hover:text-primary active:scale-95"

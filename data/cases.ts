@@ -8,8 +8,8 @@ export interface CaseStudy {
   problem: Localized;
   decisions: Localized[];
   stack: string[];
-  /** repositórios do projeto no GitHub (usuário felipeirl) */
-  repos: { name: string; label: Localized }[];
+  /** repositórios do projeto no GitHub (dono padrão: felipeirl) */
+  repos: { owner?: string; name: string; label: Localized }[];
   screenshots?: { src: string; alt: Localized }[];
   diagram?: "assemble";
 }
@@ -67,50 +67,37 @@ export const cases: CaseStudy[] = [
     diagram: "assemble",
   },
   {
-    slug: "iniciar-jarvis",
-    title: "Iniciar Jarvis",
-    kicker: { pt: "Automação para Windows", en: "Windows automation" },
+    slug: "quimia",
+    title: "Quimia API",
+    kicker: { pt: "Backend em Java", en: "Java backend" },
     summary: {
-      pt: "Abre o Claude Code com duas palmas, com detecção de áudio em tempo real para Windows.",
-      en: "Opens Claude Code with two claps, using real-time audio detection on Windows.",
+      pt: "O backend do Quimia: catálogo de produtos químicos, estante do usuário, análise de FDS e detecção de misturas perigosas. Atende o app móvel e o portal web.",
+      en: "The Quimia backend: chemical product catalog, user shelf, safety data sheet analysis and hazardous mixture detection. It serves the mobile app and the web portal.",
     },
     problem: {
-      pt: "Começar uma sessão de trabalho sem tocar no teclado nem procurar o terminal.",
-      en: "Starting a work session without touching the keyboard or hunting for the terminal.",
+      pt: "Dar a pessoas e empresas um lugar confiável para consultar produtos químicos, guardar o que têm em casa e saber quais misturas oferecem risco.",
+      en: "Giving people and companies a reliable place to look up chemical products, keep track of what they own and learn which mixtures are hazardous.",
     },
     decisions: [
       {
-        pt: "Escuta contínua do microfone em tempo real, com detecção de duas palmas em sequência como gatilho.",
-        en: "Continuous real-time microphone listening, with two claps in a row as the trigger.",
+        pt: "Monólito modular: o código é dividido por área de negócio e cada módulo esconde a implementação em internal/. O build falha, via ArchUnit, se um módulo acessar o internal/ de outro.",
+        en: "Modular monolith: code is split by business area and each module hides its implementation in internal/. The build fails, through ArchUnit, if a module reaches into another module's internal/.",
       },
       {
-        pt: "Foco no Windows e em Python, o que mantém o projeto pequeno e fácil de instalar.",
-        en: "Focused on Windows and Python, which keeps the project small and easy to install.",
+        pt: "Identidade separada por público: usuários do app entram por Firebase, empresas do portal por e-mail e senha com BCrypt. A API emite JWT, e o Spring Security separa os perfis usuário, empresa e admin por rota.",
+        en: "Identity split by audience: app users sign in with Firebase, portal companies with email and password (BCrypt). The API issues a JWT, and Spring Security separates user, company and admin roles per route.",
       },
-    ],
-    stack: ["Python", "Áudio em tempo real", "Windows"],
-    repos: [{ name: "iniciar-jarvis", label: { pt: "Código", en: "Code" } }],
-  },
-  {
-    slug: "satire-api",
-    title: "Satire API",
-    kicker: { pt: "API REST em Java", en: "Java REST API" },
-    summary: {
-      pt: "API REST em Spring Boot para um marketplace de bonecos.",
-      en: "Spring Boot REST API for a collectible figures marketplace.",
-    },
-    problem: {
-      pt: "Expor o catálogo e as operações de um marketplace por uma API REST clara e testável.",
-      en: "Exposing a marketplace catalog and its operations through a clear, testable REST API.",
-    },
-    decisions: [
       {
-        pt: "Spring Boot com contrato REST explícito entre o cliente e o domínio do marketplace.",
-        en: "Spring Boot with an explicit REST contract between the client and the marketplace domain.",
+        pt: "Contrato testado: o Swagger é gerado do código e um teste falha se uma rota ficar sem documentação. Erros seguem application/problem+json e a cobertura mínima é de 80% (JaCoCo).",
+        en: "Tested contract: Swagger is generated from the code and a test fails if a route is left undocumented. Errors use application/problem+json and minimum coverage is 80% (JaCoCo).",
+      },
+      {
+        pt: "Redis no cache das leituras mais frequentes, opcional por configuração, e entrega com GitHub Actions e Docker.",
+        en: "Redis caches the most frequent reads, optional by configuration, and delivery runs on GitHub Actions and Docker.",
       },
     ],
-    stack: ["Java", "Spring Boot", "REST"],
-    repos: [{ name: "satire-api", label: { pt: "Código", en: "Code" } }],
+    stack: ["Java 21", "Spring Boot", "PostgreSQL", "Redis", "Spring Security", "Docker"],
+    repos: [{ owner: "Quimia-br", name: "quimia-api", label: { pt: "API REST", en: "REST API" } }],
   },
 ];
 

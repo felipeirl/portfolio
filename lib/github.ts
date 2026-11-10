@@ -63,6 +63,21 @@ async function fetchActivity(): Promise<number[] | null> {
   }
 }
 
+/** Repositório de outra conta (por exemplo, uma organização). Falha registrada, sem derrubar o resto. */
+async function fetchRepo(owner: string, name: string): Promise<GithubRepo | null> {
+  try {
+    const response = await fetch(`${GITHUB_API}/repos/${owner}/${name}`, {
+      headers: buildHeaders(),
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
+    if (!response.ok) throw new Error(`GitHub API respondeu ${response.status}`);
+    return (await response.json()) as GithubRepo;
+  } catch (error) {
+    console.error(`[github] falha ao carregar ${owner}/${name}:`, error);
+    return null;
+  }
+}
+
 function buildHeaders(): HeadersInit {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
@@ -78,7 +93,7 @@ function staticSnapshot(): GithubSnapshot {
   for (const project of featuredProjects) {
     projects[project.repo] = {
       repo: project.repo,
-      url: `${profile.links.github}/${project.repo}`,
+      url: `https://github.com/${project.owner ?? profile.handle}/${project.repo}`,
       stars: 0,
       language: null,
       pushedAt: null,
@@ -118,6 +133,20 @@ export async function getGithubSnapshot(): Promise<GithubSnapshot> {
         language: repo.language,
         pushedAt: repo.pushed_at,
       };
+    }
+
+    for (const project of featuredProjects) {
+      if (!project.owner || project.owner === profile.handle) continue;
+      const extra = await fetchRepo(project.owner, project.repo);
+      if (extra) {
+        snapshot.projects[project.repo] = {
+          repo: extra.name,
+          url: extra.html_url,
+          stars: extra.stargazers_count,
+          language: extra.language,
+          pushedAt: extra.pushed_at,
+        };
+      }
     }
 
     const newest = repos[0];

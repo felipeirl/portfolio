@@ -161,65 +161,38 @@ export const education: Education = {
 };
 
 export interface FeaturedProject {
+  /** repositório principal, de onde vêm estrelas, linguagem e data */
   repo: string;
+  /** dono do repositório, quando não é a conta pessoal */
+  owner?: string;
   title: string;
   description: Localized;
   stack: string[];
   /** ids dos ícones em public/icons */
   icons: string[];
-  demo?: string;
 }
 
 /** Projetos curados. Estrelas, linguagem e data vêm da API do GitHub. */
 export const featuredProjects: FeaturedProject[] = [
   {
     repo: "assemble-api",
-    title: "Assemble API",
+    title: "Assemble",
     description: {
-      pt: "API do Assemble: FastAPI, Firestore e IA com guardrail Laya. Servidor do app Android.",
-      en: "Assemble API: FastAPI, Firestore and AI with the Laya guardrail. Backend of the Android app.",
+      pt: "App Android e API para descobrir personagens de quadrinhos e conversar com eles. Kotlin e Jetpack Compose no cliente; FastAPI, Firestore e um guardrail de IA no servidor.",
+      en: "Android app and API to discover comic book characters and chat with them. Kotlin and Jetpack Compose on the client; FastAPI, Firestore and an AI guardrail on the server.",
     },
-    stack: ["Python", "FastAPI", "Firestore", "LLM"],
-    icons: ["py", "fastapi", "firebase"],
+    stack: ["Kotlin", "Jetpack Compose", "FastAPI", "Firestore", "LLM"],
+    icons: ["kotlin", "androidstudio", "py", "fastapi", "firebase"],
   },
   {
-    repo: "assemble-app",
-    title: "Assemble App",
+    repo: "quimia-api",
+    owner: "Quimia-br",
+    title: "Quimia API",
     description: {
-      pt: "App Android para descobrir personagens de quadrinhos e conversar com eles.",
-      en: "Android app to discover comic book characters and chat with them.",
+      pt: "Backend do Quimia: catálogo de produtos químicos, estante do usuário, análise de FDS e detecção de misturas perigosas. Monólito modular em Spring Boot com fronteiras garantidas por ArchUnit.",
+      en: "Quimia backend: chemical product catalog, user shelf, safety data sheet analysis and hazardous mixture detection. A modular Spring Boot monolith with boundaries enforced by ArchUnit.",
     },
-    stack: ["Kotlin", "Jetpack Compose", "Firebase"],
-    icons: ["kotlin", "androidstudio", "firebase"],
-  },
-  {
-    repo: "iniciar-jarvis",
-    title: "Iniciar Jarvis",
-    description: {
-      pt: "Abre o Claude Code com duas palmas, com detecção de áudio em tempo real para Windows.",
-      en: "Opens Claude Code with two claps, using real-time audio detection on Windows.",
-    },
-    stack: ["Python", "Áudio em tempo real"],
-    icons: ["py", "windows"],
-  },
-  {
-    repo: "satire-api",
-    title: "Satire API",
-    description: {
-      pt: "API REST em Spring Boot para um marketplace de bonecos.",
-      en: "Spring Boot REST API for a collectible figures marketplace.",
-    },
-    stack: ["Java", "Spring Boot", "REST"],
-    icons: ["java", "spring"],
-  },
-  {
-    repo: "streaming-lumos-plus",
-    title: "Lumos Plus",
-    description: {
-      pt: "Site de streaming em HTML, CSS e JavaScript puro, consumindo a API do TMDB.",
-      en: "Streaming site in plain HTML, CSS and JavaScript, consuming the TMDB API.",
-    },
-    stack: ["JavaScript", "TMDB API"],
-    icons: ["js", "html", "css"],
+    stack: ["Java 21", "Spring Boot", "PostgreSQL", "Redis", "Docker"],
+    icons: ["java", "spring", "postgres", "redis", "docker"],
   },
 ];
