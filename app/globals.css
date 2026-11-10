@@ -118,13 +118,18 @@ html[data-motion="reduced"] .pointer-parallax .hero-title {
   left: 0;
   width: 100%;
   height: 50%;
-  background-image: url("data:image/jpeg;base64,/9j/2wBDABUVFRUWFRgaGhghIx8jITAtKSktMEk0ODQ4NElvRVFFRVFFb2J3YVphd2Kxi3t7i7HMrKKszPjd3fj/////////2wBDARUVFRUWFRgaGhghIx8jITAtKSktMEk0ODQ4NElvRVFFRVFFb2J3YVphd2Kxi3t7i7HMrKKszPjd3fj/////////wgARCABFABwDASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAgQAAQMFBv/EABgBAAMBAQAAAAAAAAAAAAAAAAIDBAEA/9oADAMBAAIQAxAAAADzV08XCi2oQtaGCH4LENE/TWYuWrm1oFUu+qzi2ZpvJmBSTOZVk3P/xAAkEAACAgEEAgEFAAAAAAAAAAABAgARAxIhMUEEEBMjQlGBkf/aAAgBAQABPwCKpYgLKTE2l0DbbjuGVPEyHHkC9ERhyW5/MY2xJmLGRuw3qfG5XUooruRHYUB33DCFC6uSTuAY2SiwRrFQnuXMm6A1yKvveBWUtqsQwGvtuBr4IImlXV3Zuv6Yy0fSMUFciD6rIgjgkVfHEOx9eLkxI9uDdUJkBxsVBsdGNRJridfozqLm+MgldRra43M//8QAHREBAAMAAQUAAAAAAAAAAAAAAQACERIDECExQf/aAAgBAgEBPwCzxFyGfJW/KAZk6Y5kKy244eYCGdj0T//EABsRAQEBAAIDAAAAAAAAAAAAAAEAEQJBECEx/9oACAEDAQE/AA1ne54ATq7ckljoX1Lvh+3/2Q==");
+  background-image: url("data:image/jpeg;base64,/9j/2wBDABUVFRUWFRgaGhghIx8jITAtKSktMEk0ODQ4NElvRVFFRVFFb2J3YVphd2Kxi3t7i7HMrKKszPjd3fj/////////2wBDARUVFRUWFRgaGhghIx8jITAtKSktMEk0ODQ4NElvRVFFRVFFb2J3YVphd2Kxi3t7i7HMrKKszPjd3fj/////////wgARCABFABwDASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAgQAAQMFBv/EABgBAAMBAQAAAAAAAAAAAAAAAAIDBAAB/9oADAMBAAIQAxAAAADyxD0CwIuJdFvU81OXXunp6qbVy0cutBpn22VdA803kiA6k3WlJNz/xAAlEAACAgICAQMFAQAAAAAAAAABAgARAzESIUEEMlEQEyNCgZH/2gAIAQEAAT8A8VFUsQFlJhfjkQMK7B3DKno8px5AvhhGFli2/mObYkzFiIFsO6sT7bleaiinZEdhQHd+YQYwULz2SewDGyUWCNYqhCfMuZe0BrYoHz3ArIW5WIYDX6gwNy9pUrucFdXdm0P9MZaMNfMxuUFbEH5WRBHBIq/bqHo/T0mXEj3kDXVCZAcbFQbFbjUWNanj+GDVxMwxkMUDEDq9dxujP//EABwRAAICAwEBAAAAAAAAAAAAAAABAhESITEQQf/aAAgBAgEBPwCTxTdCr4RnkJIgtUUS46WxKteLh//EABsRAQEBAAIDAAAAAAAAAAAAAAEAEQIQITFB/9oACAEDAQE/AA1meIE6tybY+C+Jd6fd/9k=");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
   opacity: 0.75;
-  filter: saturate(0.8) contrast(1.1);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+/* esmaece a base de cada metade até a cor da página; no lugar do mask-image, que custava GPU a cada quadro */
+.bg-pillars::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, var(--color-bg) 100%);
 }
 .bg-pillars::before {
   content: "";
@@ -174,13 +179,9 @@ html.bg-ready .bg-pillars::before {
   }
 }
 
-/* paralaxe do mouse no topo da página (ponteiro fino, ligado por PointerParallax) */
-.pointer-parallax .bg-pillars-top {
-  transform: translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0) scale(1.03);
-  transition: transform 0.35s ease-out;
-}
+/* paralaxe do mouse: PointerParallax escreve o transform direto nos dois elementos (sem variáveis na raiz) */
+.pointer-parallax .bg-pillars-top,
 .pointer-parallax .hero-title {
-  transform: translate3d(calc(var(--mx, 0) * 8px), calc(var(--my, 0) * 5px), 0);
   transition: transform 0.35s ease-out;
 }
 
@@ -209,7 +210,7 @@ html.bg-ready .bg-pillars::before {
 }
 @keyframes word-up {
   from {
-    transform: translateY(110%);
+    transform: translateY(140%);
   }
   to {
     transform: none;
@@ -217,7 +218,7 @@ html.bg-ready .bg-pillars::before {
 }
 @keyframes rise {
   from {
-    transform: translateY(110%);
+    transform: translateY(140%);
   }
   to {
     transform: none;
@@ -229,8 +230,8 @@ html.bg-ready .bg-pillars::before {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  padding-block: 0.12em;
-  margin-block: -0.12em;
+  padding-block: 0.22em;
+  margin-block: -0.22em;
 }
 .split-word > span {
   display: inline-block;
@@ -240,8 +241,8 @@ html.bg-ready .bg-pillars::before {
 .hero-line {
   display: block;
   overflow: hidden;
-  padding-block: 0.06em;
-  margin-block: -0.06em;
+  padding-block: 0.22em;
+  margin-block: -0.22em;
 }
 .hero-line > span {
   display: block;
@@ -273,9 +274,7 @@ html.bg-ready .bg-pillars::before {
 
 /* cartão de vidro */
 .glass {
-  background: rgb(20 20 20 / 0.6);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgb(20 20 20 / 0.74);
   border: 1px solid var(--color-line);
   border-radius: 24px;
   box-shadow: 0 8px 32px 0 rgb(0 0 0 / 0.3);
@@ -354,13 +353,3 @@ html.bg-ready .bg-pillars::before {
   border: 2px solid var(--color-bg);
 }
 
-/* Lenis assume o scroll suave: o CSS nativo precisa ficar automático */
-html.lenis-on {
-  scroll-behavior: auto !important;
-}
-
-/* Lenis: regras mínimas do lenis.css */
-html.lenis-on,
-html.lenis-on body {
-  height: auto;
-}

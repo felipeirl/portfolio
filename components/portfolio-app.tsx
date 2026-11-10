@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { strings } from "@/data/strings";
 import type { GithubSnapshot } from "@/lib/github";
+import { AnchorScroll } from "./anchor-scroll";
 import { Background } from "./background";
 import { CommandPalette } from "./command-palette";
 import { Contact } from "./contact";
@@ -17,7 +18,6 @@ import { Nav } from "./nav";
 import { PointerParallax } from "./pointer-parallax";
 import { Projects } from "./projects";
 import { Skills } from "./skills";
-import { SmoothScroll } from "./smooth-scroll";
 
 interface PortfolioAppProps {
   github: GithubSnapshot;
@@ -48,7 +48,7 @@ function Shell({ github }: PortfolioAppProps) {
       </a>
       <Background />
       <PointerParallax />
-      <SmoothScroll />
+      <AnchorScroll />
       <Nav onOpenPalette={() => setPaletteOpen(true)} />
       <main id="main">
         <Hero github={github} />
