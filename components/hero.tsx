@@ -47,7 +47,7 @@ export function Hero({ github }: HeroProps) {
 
           <motion.p
             {...fade(0.05)}
-            className="mb-2 font-accent text-3xl text-primary italic sm:text-4xl"
+            className="mb-6 font-accent text-3xl text-primary italic sm:text-4xl"
           >
             {profile.name}
           </motion.p>
